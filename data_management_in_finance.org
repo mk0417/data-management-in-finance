@@ -1,0 +1,1054 @@
+#+TITLE: Data Management in Finance
+#+AUTHOR: Peng Li
+#+EMAIL: p.li@leeds.ac.uk
+# #+STARTUP: showall
+#+OPTIONS: email:t author:t num:t ^:nil
+#+DESCRIPTION: PhD module
+
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup
+
+# If use dark theme, use the setting below
+# #+HTML_HEAD: <style>pre.src{background:#666666;color:white;} </style>
+
+* Access WRDS
+** Unix access to WRDS
+Unix access to WRDS is useful in two ways:
+- Download from WRDS cloud.
+- Run codes in WRDS cloud.
+
+| System  | Tool             |
+|---------+------------------|
+| MacOS   | Terminal         |
+| Windows | PuTTY ([[https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html][Download)]] |
+
+*** How to access
+In the terminal:
+#+begin_src shell
+  ssh wrds_username@wrds-cloud.wharton.upenn.edu
+#+end_src
+
+*** Folder structure
+#+begin_example
+[wrds]
+  |___ [crsp]
+  |   |___ [sasdata]
+  |   |  |___ [m_stock]
+  |   |  |  |___ [dsf.sas7bdat]
+  |   |  |  |___ [...]
+  |   |  |  |___ [msf.sas7bdat]
+  |   |  |  |___ [msf.sas7bndx]
+  |   |  |___ [...]
+  |   |  |___ [m_indexes]
+  |   |___ [...]
+  |   |___ [textdata]
+  |___ [...]
+  |___ [comp]
+  |___ [ibes]
+  
+[] = directory
+#+end_example
+
+*** Navigation in Unix system
+*ls*: list folders and files in current directory
+
+*cd*: move to or open a directory
+
+*cd ..*: move to parent directory
+
+*** SCP to download data 
+#+begin_src shell
+  scp wrds_username@wrds-cloud.wharton.upenn.edu:
+  /wrds/crsp/sasdata/a_stock/msenames.sas7bdat ~/Desktop/
+#+end_src
+
+*** How to convert SAS data to other formats
+- Method 1: SAS
+Ask IT to install SAS for you if SAS is not available.
+#+begin_src sas
+  proc export data=msenames outfile='your_path\msenames.dta' dbms=dta replace;
+  run;
+
+  proc export data=msenames outfile='your_path\msenames.xlsx' dbms=xlsx replace;
+  run;
+#+end_src
+
+- Method 2: Python
+First, install ~pandas~ in your terminal (ask IT to install Python if it is not available).
+#+begin_src shell
+  pip install pandas
+#+end_src
+
+Then, you can convert data format.
+#+begin_src python
+  import pandas as pd
+
+  data = pd.read_sas('your_path/msenames.sas7bdat',encoding='utf-8')
+  data.to_stata('your_path/msenames.dta',write_index=False)
+  data.to_csv('your_path/msenames.txt',sep='\t',index=False)
+  data.to_csv('your_path/msenames.csv',index=False)
+#+end_src
+
+#+begin_note
+You can also follow the link ([[https://stats.idre.ucla.edu/other/mult-pkg/faq/how-do-i-use-a-sas-data-file-in-stata/][HOW DO I USE A SAS DATA FILE IN STATA?]]) to check other methods.
+#+end_note
+
+** SAS connection to WRDS 
+#+begin_src sas
+  %let wrds=wrds-cloud.wharton.upenn.edu 4016;
+  options comamid=TCP remote=WRDS;
+  signon username=_prompt_;
+
+  libname mylib 'your_local_path';
+  libname crsp remote '/wrds/crsp/sasdata/a_stock' server=wrds;
+
+  proc sql;
+      create table mylib.data as
+      select permno,cusip,date,prc,ret
+      from crsp.msf
+      where'01Jan2018'd<=date<='31Jan2018'd
+      order by permno,date;
+  quit;
+
+  signoff;
+#+end_src
+
+** Python connection to WRDS
+*** Install =wrds= package
+In the terminal:
+#+begin_src shell
+pip install wrds
+#+end_src
+
+*** Retrieve data using Python
+#+begin_src python
+  import pandas as pd
+  import wrds
+
+  # Build connection to WRDS 
+  # Type WRDS username and password after execute the code below
+  conn = wrds.Connection()
+
+  # Download data
+  data = conn.raw_sql(""" 
+    select *
+    from crsp.msf
+    where date>='01/01/2010'
+  """)
+#+end_src
+
+** Introduction to Stata
+*** Import data into Stata
+#+begin_src stata
+/* Set working directory */
+cd "your_working_directory"    
+   
+/* Import Stata data */
+use msenames, clear
+
+/* Import txt file */
+import delimited msenames.txt, clear
+
+/* Import csv file */
+import delimited msenames.csv, clear    
+   
+/* Import Excel file */
+import excel msenames.xlsx, firstrow clear
+#+end_src
+
+*** Preview data
+#+begin_src Stata
+  use msenames, clear
+  browse
+  ds
+  describe
+  describe permno
+  codebook shrcd
+  lookfor com
+  list permno cusip ncusip in 1/10
+#+end_src
+
+** Which software
+*** Data management and data analysis
+- Data management
+  - data cleaning
+  - merge datasets
+  - variable construction
+  - web scraping
+  - handle large datasets
+- Data analysis
+  - statistics test
+  - regression
+  - numerical computation
+  - machine learning
+  - parallel computing
+- Python and SAS are more powerful in data management, while R and Stata are more convenient in data analysis, especially econometrics.
+*** Open source and commercial software
+- Python and R are open source
+  - Free
+  - Bug: e.g. here is a bug in Pandas 0.25: [[https://github.com/pandas-dev/pandas/issues/27526]]
+- SAS and Stata are commercial software
+  - Need licence and expensive.
+
+#+begin_quote
+/Even though data management and regression can be performed in SAS, some users prefer to use another package to do the 'final' steps. For example, SAS can be used to retrieve and manage the data. The final dataset created in SAS can then be converted for example to STATA format (using StataTrans). STATA can then be used to create the tables with descriptive statistics, correlation tables, and perform (final) regressions and other statistical tests. However, in these tutorials only SAS is covered./
+
+    --- /wrds.us (http://www.wrds.us/index.php/tutorial/view/14)/
+#+end_quote
+** Code management: version control (optional)
+*** Git
+*** Github
+
+* CRSP and Compustat
+** CRSP
+*** Data type
+It is important to identify the type of the data, especially for variable
+with mix type. For example, return or price data should be numeric format.
+However, software will consider the variable as text format if the variable contains both numeric and string data.For string variable, you cannot perform any calculation.
+Return data in CRSP contains missing codes, such as 'A', 'B', 'C', etc.
+So the return is in string format after you import raw data from CRSP.
+
+*** Stock exchanges
+For the majority of studies, three main stock exchanges are used in US market and =exchcd= allows us to filter them out.
+| exchcd | stock exchange |
+|--------+----------------|
+|      1 | NYSE           |
+|      2 | AMEX           |
+|      3 | NASDAQ         |
+
+*** Share types
+CRSP includes different type of securities, for example, common stocks and ETFs. Common stocks are most widely used and =shrcd= can helps us to filter out common shares. =shrcd= with 10 or 11 indicate common shares.
+
+*** Duplicates
+CRSP data via WRDS website contains duplicated observations. This is caused by corporate events in a month.
+
+[[./dup.png]]
+
+*** Negative stock prices
+CRSP uses average of bid and ask price to replace price if there is no valid closing price for a given data. To distinguish them, CRSP assigns negative sign (-) in front of the average of bid and ask price. It does not mean the price is negative. Therefore, we need to convert them to positive value.
+
+*** Adjusted price
+Stock return calculated by unadjusted price cannot measure the true performance. The unadjusted price should be adjusted before calculating stock return.
+[[./png/adjprc.png]]
+** Compustat
+*** Unique gvkey-datadate observation.
+- WRDS website
+#+html_attr: width:500px
+[[./funda_screen_unique.png]]
+- WRDS cloud
+Need to write code to achieve the screening.  
+*** CUSIP
+CUSIP in Compustat is 9-character. Need to convert it to 8-digit CUSIP when merge Compustat and CRSP. To convert 9-digit CUSIP, delete the 9th character.
+*** Multiple observations in the same year
+Due to the change of fiscal year end, there are more than one observation for a company in the same fiscal year. You can remove such cases or keep the most recent one.
+
+** Code
+***  Stata
+#+begin_src stata
+  clear
+
+  /* Set up working directory */
+  cd "your_working_directory"
+
+  /* ----------------------- CRSP -----------------------*/
+  /* Import CRSP data */
+  import delimited crsp_raw_data.txt, clear
+
+  /* Check data type */
+  describe
+
+  /* Convert data type */
+  gen r = real(ret)
+
+  /* Check duplicates */
+  duplicates drop permno date, force
+
+  /* US domestic common shares */
+  tabulate shrcd
+
+  keep if inlist(shrcd,10,11)
+
+  /* Stock exchanges */
+  tab exchcd
+
+  keep if inlist(exchcd,1,2,3)
+
+  /* Count number of obsrvations */
+  count
+
+  /* Negative stock prices */
+  count if prc<=0
+
+  gen price = abs(prc)
+  replace price = . if price==0
+
+  /* Non-positive market value */
+  gen me = (price*shrout) / 1000
+  replace me = . if me<=0
+
+  /* Adjusted price and shares */
+  gen price_adj = price / cfacpr
+  gen shrout_adj = shrout * cfacshr
+
+  /* Save data in Stata format */
+  save crsp_monthly, replace
+
+  /*-------------------------- Compustat ---------------------------*/
+  /* Import Compustat */
+  import delimited funda.txt, clear
+
+  /* Keep unique GVKEY-DATADATE observations */
+  keep if consol=="C" & indfmt=="INDL" & datafmt=="STD" & popsrc=="D" & curcd=="USD"
+
+  /* Multiple fiscal year ends in same calendar year */
+  bysort gvkey fyear: egen n = count(fyear)
+  keep if n==1
+
+  /* Save Compustat in Stata format */
+  save funda, replace
+
+  /*------------------------- Know your data -----------------------*/
+  use crsp_monthly, clear
+
+  /* Holding period returns */
+  sort permno date
+  forvalues i = 1/11 {
+      by permno: gen lr`i' = r[_n-`i']
+  }
+
+  gen hpr = 1 + r
+  forvalues i = 1/11 {
+      replace hpr = hpr * (1+lr`i')
+  }
+  replace hpr = hpr - 1
+
+  /* Summarize full sample */
+  summarize r price
+
+  sum r price, d
+
+  tabstat r price, s(mean median sd)
+
+  /* Summarize by group */
+  gen year = int(date/10000)
+
+  bysort year: sum r price if year>=1991
+
+  tabstat r price if year>=1991, s(mean sd) by(year)
+
+  tabstat r price, s(mean median sd) by(year) nototal
+
+  table year, c(mean r sd r)
+#+end_src
+
+*** Python
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+  import os 
+
+  data_dir = 'your_data_path'
+
+  # ------------------  CRSP  ----------------
+  # Read CRSP monthly data 
+  crspm = pd.read_csv(os.path.join(data_dir,'crsp_raw_data.txt'),
+    sep='\t',low_memory=False) 
+  crspm.columns = crspm.columns.str.lower()
+  # Check data types
+  print(crspm.dtypes)
+
+  # Convert data type
+  crspm['ret'] = pd.to_numeric(crspm['ret'],errors='coerce')
+
+  # Check duplicates
+  crspm = crspm.drop_duplicates(['permno','date'])
+
+  # US domestic common shares
+  print(crspm['shrcd'].value_counts())
+
+  crspm = crspm[crspm['shrcd'].isin([10,11])]
+
+  # Stock exchanges
+  print(crspm['exchcd'].value_counts())
+
+  crspm = crspm[crspm['exchcd'].isin([1,2,3])]
+
+  # Count number of obsrvations
+  print(len(crspm))
+
+  # Negative stock prices
+  print(len(crspm[crspm['prc']<=0]))
+
+  crspm['price'] = crspm['prc'].abs()
+  crspm['price'] = np.where(crspm['price']==0,np.nan,crspm['price'])
+
+  # Non-positive market value
+  crspm['me'] = (crspm['price']*crspm['shrout']) / 1000
+  crspm['me'] = np.where(crspm['me']==0,np.nan,crspm['me'])
+
+  # Adjusted price and shares
+  crspm['price_adj'] = crspm['price'] / crspm['cfacpr']
+  crspm['shrout_adj'] = crspm['shrout'] * crspm['cfacshr']
+
+  # Save data in txt
+  crspm.to_csv(os.path.join(data_dir,'crsp_monthly.txt'),
+    sep='\t',index=False)
+
+  # ------------------  Compustat  ----------------
+  # Import Compustat
+  funda = pd.read_csv(os.path.join(data_dir,'funda_raw_data.txt'),
+    sep='\t')
+
+  # Keep unique GVKEY-DATADATE observations if you extract data from
+  # WRDS server without the conditions below
+  # funda = funda.query("consol=='C' and indfmt=='INDL' and datafmt=='STD'
+  #    and popsrc=='D' and curcd=='USD'")
+
+  # Multiple fiscal year ends in same calendar year
+  funda['n'] = funda.groupby(['gvkey','fyear'])['fyear'].transform('count')
+  funda = funda[funda['n']==1] 
+
+  # Save Compustat in txt */
+  funda.to_csv(join(data_dir,'funda.txt'),sep='\t',index=False)
+
+  # ----------------------  Know your data  ---------------------
+  crspm = pd.rea_csv(os.path.join(data_dir,'crsp_monthly.txt'),
+    sep='\t',low_memory=False)
+
+  # Holding period returns
+  crspm['logret'] = np.log(crspm['ret']+1)
+  crspm = crspm.sort_values(['permno','date']).reset_index(drop=True)
+  crspm['hpr'] = crspm.groupby('permno')['logret'] \
+    .rolling(window=6,min_periods=6).sum().reset_index(drop=True)
+  crspm['hpr'] = np.exp(crspm['hpr']) - 1
+
+  # Summarize full sample
+  print(crspm['ret'].describe())
+
+  print(crspm['ret'].describe()[['mean','median','std']])
+
+  print(crspm['ret'].describe(percentiles=[0.1,0.9]))
+
+  # Summarize by group
+  crspm['year'] = (crspm['date']/10000).astype(int)
+
+  print(crspm[crspm['year']>=1991].groupby('year')['ret'].describe())
+
+  print(crspm[crspm['year']>=1991].groupby('year') \
+    [['ret','price']].agg(['mean','median','std']))
+#+end_src
+
+* IBES and Thomson Reuters 13-F
+** Understand IBES data
+
+** Code: summary statistics of IBES data
+*** Stata
+#+begin_src Stata
+  clear
+
+  cd "your_working_directory"
+
+  /* Read data drop duplicates */
+  import delimited ibes_1976_1990_summ_both.txt, clear
+  duplicates drop ticker statpers, force
+
+   /* Check 1-year EPS: use either codebook or count */
+  codebook measure fpi
+
+  count if missing(measure)
+  count if missing(fpi)
+
+  /* US sample */
+  tab usfirm
+
+  bysort usfirm: count
+  keep if usfirm == 1
+
+  /* Sample selection: keep firms with at least 60 month of numest */
+  bysort ticker: egen num_month = count(numest)
+  keep if num_month >= 60
+
+  /* firm-month observations */
+  count
+
+  /* Generate firmid to check number of unique firm */
+  egen firmid = group(ticker)
+  order firmid
+  tabstat firmid, s(max)
+
+   /* Basic statistics */
+  summ numest meanest stdev
+  summ numest meanest stdev, d
+  gen year = int(statpers/10000)
+  bysort year: summ numest meanest stdev
+
+  tabstat numest meanest stdev
+        
+  /* check the list of available statistics */
+  help tabstat 
+  tabstat numest meanest stdev, s(n mean sd min p1 median p99 max)
+  tabstat numest meanest stdev, by(year) s(n mean sd min p1 median p99 max)
+
+  /* Percentile */
+  centile (meanest), centile(10,20,30,40,50,60,70,80,90)
+
+  egen p10 = pctile(meanest), p(10) by(year)
+  egen p20 = pctile(meanest), p(20) by(year)
+  egen p30 = pctile(meanest), p(30) by(year)
+  egen p40 = pctile(meanest), p(40) by(year)
+  egen p50 = pctile(meanest), p(50) by(year)
+  egen p60 = pctile(meanest), p(60) by(year)
+  egen p70 = pctile(meanest), p(70) by(year)
+  egen p80 = pctile(meanest), p(80) by(year)
+  egen p90 = pctile(meanest), p(90) by(year)
+
+  drop p10-p90
+  forvalues i = 10(10)90 {
+      egen p`i' = pctile(meanest), p(`i') by(year)
+  }
+
+  /* Correlation */
+  corr numest meanest stdev
+#+end_src
+
+*** Python
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+  import os
+
+  data_dir = 'your_data_path'
+
+  # Read IBES data
+  ibes = pd.read_csv(os.path.join(data_dir,'ibes_1976_1990_summ_both.txt'),
+    sep='\t',low_memory=False)
+  ibes.columns = ibes.columns.str.lower()
+
+  # Check if 1-year EPS forecasts: unique or value_counts
+  print(ibes['measure'].unique())
+  print(ibes['fpi'].unique())
+
+  ibes['measure'].value_counts()
+  
+  ibes['fpi'].value_counts()
+
+  # Keep US only: 1=US and 0=international
+  ibes['usfirm'].value_counts()
+  ibes_us = ibes[ibes['usfirm']==1].copy()
+
+  # Keep firms with at least 60-month of numest
+  ibes_us['num_month'] = ibes.groupby('ticker') \
+    ['numest'].transform('count')
+  ibes_us = ibes_us.query('num_month>=60')
+
+  # Firm-month observations
+  len(ibes_us)
+
+  # Number of unique firms
+  len(ibes_us['ticker'].unique())
+
+  # Summary statistics
+  ibes_us[['numest','meanest','stdev']].describe()
+
+  ibes_us['year'] = (ibes_us['statpers']/10000).astype(int)
+  ibes_us.groupby('year')[['numest','meanest','stdev']] \
+    .agg(['mean','median','std'])
+
+  # Percentiles
+  pctls = ibes_us.groupby('year')['numest'] \
+      .quantile([i/10 for i in range(1,10)]).unstack().reset_index()
+
+  # Correlation
+  ibes_us[['numest','meanest','stdev']].corr()
+#+end_src
+
+** Code: number of institutional investors
+*** Stata
+#+begin_src Stata
+  clear
+
+  cd "your_working_directory"
+
+  /* Read data */
+  import delimited type1.txt, clear
+  keep if fdate==rdate
+
+  /* Count number of institutional investors by type */
+  collapse (count) n=mgrno, by(rdate typecode)
+
+  /* Reshape */
+  reshape wide n, i(rdate) j(typecode)
+  sort rdate
+
+  label variable n1 bank
+  label variable n2 insurance
+  label variable n3 mutual_fund
+  label variable n4 advisor
+  label variable n5 other
+
+  egen total = rowtotal(n1 n2 n3 n4 n5)
+  gen date = date(string(rdate,"%8.0f"),"YMD")
+  format date %td
+
+  /* Time series plot */
+  tsset date, daily
+  graph twoway tsline n1 n2 n3 n4 n5 total, tlabel(31jan2005 31jan2010 31jan2015)
+  graph export n_inst.eps, replace
+#+end_src
+[[./n_inst_do.png]]
+
+*** Python
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+  import wrds
+  from matplotlib import pyplot as plt
+  import os
+
+  # Connect to WRDS
+  conn = wrds.Connection()
+
+  # Read data
+  inst = conn.raw_sql("""
+      select *
+      from tfn.s34type1
+      where rdate>='01/01/2005'
+  """)
+
+  inst1 = inst.query('rdate==fdate').copy()
+
+  n_inst = inst1.groupby(['typecode','rdate']) \
+      ['mgrno'].count().to_frame('n').reset_index()
+  n_inst.head()
+
+  n_inst1 = pd.pivot(n_inst,index='rdate',columns='typecode',values='n')
+  del n_inst1.index.name
+  del n_inst1.columns.name
+  n_inst1.columns = ['Bank','Insurance','Mutual fund','Advisor','Other']
+  n_inst1['total'] = n_inst1.sum(1)
+  n_inst1.index = pd.to_datetime(n_inst1.index,format='%Y-%m-%d')
+
+  n_inst1.plot(figsize=(8,5))
+  plt.tight_layout()
+  plt.savefig('path_to_save_the_figure')
+  plt.show()
+#+end_src
+[[./n_inst_py.png]]
+
+* Datastream and Thomson OneBanker
+** Download data from Datastream
+*** Login
+    Follow the steps to login:
+    [[./tr_login.png]] 
+    [[./login_window.png]]    
+    
+*** Enable Datastream (optional)
+    If there is no =THOMSON REUTERS DATASTREAM= tab, please click =THOMSON REUTERS= , =Options= and =OK=. Then re-open Excel will make Datastream installed.
+    [[./tr_app.png]]
+    
+*** Use =New Request Table= to download data
+    [[./datastream.png]]
+    [[./request_table.png]]
+    [[./tr_setting.png]]
+    
+    - =Find Series= is to fill in a list of companies.
+	- =Datatypes= is to choose variables you want to download.
+    - Just follow the setting. What you need to change is the company list and variable.
+    - Click =Process Table= to start the download.
+
+*** Data structure
+    [[./tr_data.png]]
+    
+    #+begin_note
+    Data from Datastream is not panel data format, so you need to transpose the data before you analyze the data.
+    #+end_note
+    
+** Code: transpose data
+***  Stata
+#+begin_src Stata
+  clear
+
+  cd "your_working_directory"
+
+  /* Import firm total asset */
+  import excel using datastream_data, sheet("asset_1") first clear
+  rename Code year
+
+  /* Rename */
+  ds year, not
+  return list
+  rename (`r(varlist)') asset#, addnumber
+
+  /* Reshape wide to long */
+  reshape long asset, i(year) j(firmid)
+  sort firmid year
+  save datastream_asset,replace
+
+  /* Import firm list and merge firm total asset */
+  import excel using datastream_data, sheet("firm_list") first clear
+
+  merge 1:m firmid using datastream_asset
+  drop _merge
+  save datastream_asset,replace
+
+  /* Import fiscal year end and reshape */
+  import excel using datastream_data, sheet("fyend_1") first clear
+  rename Code year
+  reshape long firm, i(year) j(firmid)
+  rename firm fyear
+
+  /* Merge firm total asset */
+  merge 1:1 firmid year using datastream_asset
+  drop _merge firmid
+  gen temp_month = substr(fyear,1,2)
+  gen fmonth = real(subinstr(temp_month,"/","",.))
+  drop temp_month
+  order isin year
+  sort isin year
+  save datastream_data, replace
+#+end_src
+
+*** Python
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+  import os
+
+  data_dir = 'your_data_path'
+
+  # Read firm assets from Datastream
+  asset = pd.read_excel(os.path.join(data_dir,'datastream_data.xlsx'),
+      sheet_name='asset_1')
+
+  # Transpose data
+  asset1 = pd.melt(asset,id_vars='Code',value_vars=asset.columns[1:],
+      value_name='asset')
+  asset1['isin'] = asset1['variable'].str[:12]
+  asset1 = asset1[['isin','Code','asset']]
+  asset1 = asset1.rename(columns={'Code':'year'})
+
+  # Read fiscal year end
+  fyear = pd.read_excel(os.path.join(data_dir,'datastream_data.xlsx'),
+      sheet_name='fyend')
+
+  # Transpose data
+  fyear1 = pd.melt(fyear,id_vars='Code',value_vars=fyear.columns[1:],
+      value_name='fyear')
+  fyear1['isin'] = fyear1['variable'].str[:12]
+  fyear1[['fmonth','_tmp']] = fyear1['fyear'].str.split('/',n=1,expand=True)
+  fyear1 = fyear1.rename(columns={'Code':'year'})
+  fyear1 = fyear1[['isin','year','fyear','fmonth']]
+
+  # Merge total assets and fiscal year end
+  asset2 = asset1.merge(fyear1,how='inner',on=['isin','year'])
+  asset2 = asset2.sort_values(['isin','year']).reset_index(drop=True)
+#+end_src
+
+* Compustat Global and Bloomberg
+** Global data
+The quality of global data is not as good as US data. You need to do more data cleanings to get rid of potential data errors. 
+** Compustat Global
+Compustat Global is the global version of Compustat North America. Most variable names of accounting data are the same with Compustat NA. This is very convenient for cross-country studies, as you can use same variables to construct same measurments.
+*** Compustat Global vs Datastream
+Datastream is a very popular database for global studies which has larger firm coverage than Compustat Global. However, the coverage of Compustat Global improve a lot after 1992.
+*** Compustat Global vs Bloomberg
+Bloomberg is another useful source to find international data. It provides many alternative data, e.g. twitter sentiment and news heat. However, its return and accounting data are not well accepted by top journals because the survivorship bias.
+** Code: Compustat Global   
+*** Stata
+    #+begin_src Stata
+      clear
+
+      cd "your_working_directory"
+
+      /* Read data from Compustat Global */
+      import delimited uk.txt, clear
+
+      /* Keep common shares */
+      keep if tpci == "0"
+
+      /* Keep primary issue */
+      keep if iid == prirow
+
+      /* fic = GBR */
+      keep if fic == "GBR"
+
+      /* Check duplicates */
+      duplicates drop gvkey iid datadate, force
+
+      /* Adjusted price */
+      gen p_adj = prccd / ajexdi * trfd
+
+      /* Security level id */
+      tostring gvkey, gen(gvkey_str)
+      gen stkcd = gvkey_str + iid
+      order stkcd datadate
+
+      /* Generate date index */
+      preserve
+      duplicates drop datadate, force
+      gen date_idx = _n
+      keep datadate date_idx
+      sort datadate
+      save uk_date_idx, replace
+      restore
+
+      /* Calculate daily return */
+      merge m:1 datadate using uk_date_idx
+      sort stkcd datadate
+      bysort stkcd: gen ldate_idx = date_idx[_n-1]
+      bysort stkcd: gen lp_adj = p_adj[_n-1]
+      gen date_diff = date_idx - ldate_idx
+      gen ret = p_adj / lp_adj - 1
+      count if ret!=.
+
+      tab date_diff
+
+      replace ret = . if date_diff!=1
+      count if ret!=.
+
+      /* --------  Calculate monthly return  -----------*/
+      keep if monthend==1
+      keep stkcd datadate p_adj
+
+      gen yyyymm = int(datadate/100)
+      gen year = int(yyyymm/100)
+      gen month = mod(yyyymm,100)
+
+      tabstat yyyymm, s(min)
+
+      /* Generate month index */
+      gen month_idx = (year-2017)*12 + month - 9
+
+      sort stkcd yyyymm
+      bysort stkcd: gen lmonth_idx = month_idx[_n-1]
+      bysort stkcd: gen lp_adj = p_adj[_n-1]
+      gen month_diff = month_idx - lmonth_idx
+      gen ret = p_adj / lp_adj - 1
+      count if ret!=.
+
+      tab month_diff
+
+      replace ret = . if month_diff!=1
+      count if ret!=.
+    #+end_src
+    
+*** Python
+    #+begin_src python
+      import pandas as pd
+      import numpy as np
+      import os
+
+      data_dir = 'your_data_path'
+
+      # Read data
+      uk = pd.read_csv(os.path.join(data_dir,'uk.txt'),sep='\t',low_memory=False)
+
+      # Keep common shares
+      uk = uk[uk['tpci']=='0']
+
+      # Keep fic = 'GBR'
+      uk = uk[uk['fic']=='GBR']
+
+      # Check duplicates
+      uk = uk.drop_duplicates(['gvkey','iid','datadate'])
+
+      # Adjusted price
+      uk['p_adj'] = (uk['prccd']/uk['ajexdi']) * uk['trfd']
+
+      # Security level ID
+      uk['stkcd'] = uk['gvkey'].astype(str) + uk['iid']
+
+      # Generate date index
+      date_index = uk.drop_duplicates('datadate')[['datadate']].copy()
+      date_index = date_index.sort_values('datadate').reset_index(drop=True)
+      date_index['date_idx'] = date_index.index + 1
+
+      # Calculate daily return
+      uk1 = uk.merge(date_index,how='inner',on='datadate')
+      uk1 = uk1.sort_values(['stkcd','datadate']).reset_index(drop=True)
+      uk1['ldate_idx'] = uk1.groupby('stkcd')['date_idx'].shift(1)
+      uk1['lp_adj'] = uk1.groupby('stkcd')['p_adj'].shift(1)
+      uk1['date_diff'] = uk1['date_idx'] - uk1['ldate_idx']
+      uk1['ret'] = uk1['p_adj'] / uk1['lp_adj'] - 1
+
+      uk1['date_diff'].value_counts()
+
+      uk1['ret'] = np.where(uk1['date_diff']==1,uk1['ret'],np.nan)
+
+      # ------------  Calculate monthly return  -------------------
+      uk_month = uk1.query('monthend==1')[['stkcd','datadate','p_adj']].copy()
+      uk_month['yyyymm'] = (uk_month['datadate']/100).astype(int)
+      uk_month['year'] = (uk_month['yyyymm']/100).astype(int)
+      uk_month['month'] = uk_month['yyyymm'] % 100
+
+      # Generate month index
+      uk_month['month_idx'] = (uk_month['year']-2017)*12 + uk_month['month'] - 9
+
+      uk_month = uk_month.sort_values(['stkcd','yyyymm']).reset_index(drop=True)
+      uk_month['lmonth_idx'] = uk_month.groupby('stkcd')['month_idx'].shift(1)
+      uk_month['lp_adj'] = uk_month.groupby('stkcd')['p_adj'].shift(1)
+      uk_month['month_diff'] = uk_month['month_idx'] - uk_month['lmonth_idx']
+      uk_month['ret'] = uk_month['p_adj'] / uk_month['lp_adj'] - 1
+
+      uk_month['month_diff'].value_counts()
+
+      uk_month['ret'] = np.where(uk_month['month_diff']==1,
+        uk_month['ret'],np.nan)
+    #+end_src
+
+** Code: Bloomberg    
+***  Stata
+    #+begin_src Stata
+      clear
+
+      cd "your_working_directory"
+   
+      /* Read data from Bloomberg */
+      import excel bloomberg_data, sheet("Sheet3") firstrow clear
+
+      local c = 1
+      foreach i of varlist GB00B1XZS820Equity-GB00B1KJJ408Equity {
+          rename `i' firm`c'
+          local c = `c'+1
+      }
+
+      /* Drop firms with missing data in all years */
+      ds, has(type string)
+      return list
+      drop `r(varlist)'
+
+      /* Transpose data */
+      reshape long firm, i(date) j(firmid)
+      rename firm assets
+      order firmid date
+      sort firmid date
+    #+end_src
+    
+*** Python
+    #+begin_src python
+      import pandas as pd
+      import numpy as np
+      import os
+
+      data_dir = 'your_data_path'
+
+      asset = pd.read_excel(os.path.join(data_dir,'bloomberg_data.xlsx'),
+          sheet_name='Sheet3')
+
+      asset1 = pd.melt(asset,id_vars='date',value_vars=asset.columns[1:],
+          value_name='asset')
+
+      asset1['isin'] = asset1['variable'].str[:12]
+      asset1['asset'] = pd.to_numeric(asset1['asset'],errors='coerce')
+      asset1 = asset1[['isin','date','asset']] \
+          .sort_values(['isin','date']).reset_index(drop=True)
+    #+end_src
+
+* Execucomp
+
+**  Code: Female directors over time 
+*** Stata
+#+begin_src stata
+      clear
+
+      cd "your_working_directory"
+
+      import delimited execucomp.txt, clear
+
+      /* Rename year */
+      rename year fyear
+
+      /* Check duplicates */
+      duplicates drop gvkey fyear execid, force
+
+      /* Count totoal number of executives */
+      bysort gvkey fyear: egen n_total = count(execid)
+
+      /* Count number of female executives */
+      gen gender_id = 1 if gender=="FEMALE"
+      replace gender_id = 0 if gender=="MALE"
+      bysort gvkey fyear: egen n_female = sum(gender_id)
+
+      /* Count number of female CEO */
+      gen gender_ceo = 1 if gender=="FEMALE" & ceoann=="CEO"
+      replace gender_ceo = 0 if gender_ceo == .
+      bysort gvkey fyear: egen n_female_ceo = sum(gender_ceo)
+
+      duplicates drop gvkey fyear, force
+
+      gen pct_female = n_female / n_total
+      gen pct_female_ceo = n_female_ceo / n_total
+
+      collapse (mean) pct_female=pct_female \\\
+        pct_female_ceo=pct_female_ceo, by(fyear)
+
+      line pct_female pct_female_ceo fyear
+      graph export pct_female_do.eps, replace
+    #+end_src
+    [[./pct_female_do.png]]
+    
+*** Python
+#+begin_src python
+  import pandas as pd
+  import numpy as np
+  from matplotlib import pyplot as plt
+  import os
+
+  data_dir = 'your_data_path'
+
+  exec = pd.read_csv(os.path.join(data_dir,'execucomp.txt'),
+      sep='\t',low_memory=False,encoding='ISO-8859-1')
+  exec.columns = exec.columns.str.lower()
+  # Rename year
+  exec = exec.rename(columns={'year':'fyear'})
+  # Check duplicates
+  exec = exec.drop_duplicates(['gvkey','fyear','execid'])
+
+  # Count number of executives
+  pct_female = exec.groupby(['gvkey','fyear','gender'])['execid'] \
+      .count().unstack()
+  pct_female = pct_female.fillna(0)
+  pct_female['total'] = pct_female['FEMALE'] + pct_female['MALE']
+
+  # Count number of female CEO
+  female_ceo = exec[(exec['ceoann']=='CEO')&(exec['gender']=='FEMALE')] \
+      .groupby(['gvkey','fyear'])['execid'].count().to_frame('n_female_ceo')
+  pct_female = pct_female.join(female_ceo,how='left')
+  pct_female = pct_female.fillna(0)
+  pct_female['pct_female'] = pct_female['FEMALE'] / pct_female['total']
+  pct_female['pct_female_ceo'] = pct_female['n_female_ceo'] / pct_female['total']
+
+  # Calculate averge percentage by year
+  pct_female = pct_female.groupby(level=1) \
+      [['pct_female','pct_female_ceo']].mean()
+
+  # Plot
+  pct_female.plot(figsize=(7,3))
+  plt.tight_layout()
+  plt.savefig(os.path.join(data_dir,'pct_female_py.png'))
+  plt.show()
+#+end_src
+    [[./pct_female_py.png]]
+    
+* Merge Datasets
+** Code: merge CRSP and Compustat (wrds website)
+*** Stata
+#+begin_src stata
+
+#+end_src
+
+*** Python
+#+begin_src python
+
+#+end_src
+
+** Code: merge CRSP and Compustat (wrds cloud)
+*** Python
+#+begin_src python
+
+#+end_src
+
+* Asset Pricing
+
+* Corporate Governance
+
+* Event Study
