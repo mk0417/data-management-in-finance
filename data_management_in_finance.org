@@ -206,7 +206,6 @@ with mix type. For example, return or price data should be numeric format.
 However, software will consider the variable as text format if the variable contains both numeric and string data.For string variable, you cannot perform any calculation.
 Return data in CRSP contains missing codes, such as 'A', 'B', 'C', etc.
 So the return is in string format after you import raw data from CRSP.
-
 *** Stock exchanges
 For the majority of studies, three main stock exchanges are used in US market and =exchcd= allows us to filter them out.
 | exchcd | stock exchange |
@@ -214,18 +213,13 @@ For the majority of studies, three main stock exchanges are used in US market an
 |      1 | NYSE           |
 |      2 | AMEX           |
 |      3 | NASDAQ         |
-
 *** Share types
 CRSP includes different type of securities, for example, common stocks and ETFs. Common stocks are most widely used and =shrcd= can helps us to filter out common shares. =shrcd= with 10 or 11 indicate common shares.
-
 *** Duplicates
 CRSP data via WRDS website contains duplicated observations. This is caused by corporate events in a month.
-
-[[./dup.png]]
-
+[[./png/dup.png]]
 *** Negative stock prices
 CRSP uses average of bid and ask price to replace price if there is no valid closing price for a given data. To distinguish them, CRSP assigns negative sign (-) in front of the average of bid and ask price. It does not mean the price is negative. Therefore, we need to convert them to positive value.
-
 *** Adjusted price
 Stock return calculated by unadjusted price cannot measure the true performance. The unadjusted price should be adjusted before calculating stock return.
 [[./png/adjprc.png]]
@@ -233,14 +227,13 @@ Stock return calculated by unadjusted price cannot measure the true performance.
 *** Unique gvkey-datadate observation.
 - WRDS website
 #+html_attr: width:500px
-[[./funda_screen_unique.png]]
+[[./png/funda_screen_unique.png]]
 - WRDS cloud
 Need to write code to achieve the screening.  
 *** CUSIP
 CUSIP in Compustat is 9-character. Need to convert it to 8-digit CUSIP when merge Compustat and CRSP. To convert 9-digit CUSIP, delete the 9th character.
 *** Multiple observations in the same year
 Due to the change of fiscal year end, there are more than one observation for a company in the same fiscal year. You can remove such cases or keep the most recent one.
-
 ** Code
 ***  Stata
 #+begin_src stata
@@ -439,7 +432,6 @@ Due to the change of fiscal year end, there are more than one observation for a 
 
 * IBES and Thomson Reuters 13-F
 ** Understand IBES data
-
 ** Code: summary statistics of IBES data
 *** Stata
 #+begin_src Stata
@@ -638,25 +630,22 @@ Due to the change of fiscal year end, there are more than one observation for a 
 ** Download data from Datastream
 *** Login
     Follow the steps to login:
-    [[./tr_login.png]] 
-    [[./login_window.png]]    
-    
+    [[./png/tr_login.png]] 
+    [[./png/login_window.png]]    
 *** Enable Datastream (optional)
     If there is no =THOMSON REUTERS DATASTREAM= tab, please click =THOMSON REUTERS= , =Options= and =OK=. Then re-open Excel will make Datastream installed.
-    [[./tr_app.png]]
-    
+    [[./png/tr_app.png]]
 *** Use =New Request Table= to download data
-    [[./datastream.png]]
-    [[./request_table.png]]
-    [[./tr_setting.png]]
+    [[./png/datastream.png]]
+    [[./png/request_table.png]]
+    [[./png/tr_setting.png]]
     
     - =Find Series= is to fill in a list of companies.
 	- =Datatypes= is to choose variables you want to download.
     - Just follow the setting. What you need to change is the company list and variable.
     - Click =Process Table= to start the download.
-
 *** Data structure
-    [[./tr_data.png]]
+    [[./png/tr_data.png]]
     
     #+begin_note
     Data from Datastream is not panel data format, so you need to transpose the data before you analyze the data.
@@ -944,7 +933,6 @@ Bloomberg is another useful source to find international data. It provides many 
     #+end_src
 
 * Execucomp
-
 **  Code: Female directors over time 
 *** Stata
 #+begin_src stata
