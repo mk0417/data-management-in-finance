@@ -20,23 +20,21 @@ Unix access to WRDS is useful in two ways:
 |---------+------------------|
 | MacOS   | Terminal         |
 | Windows | PuTTY ([[https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html][Download)]] |
-
 *** How to access
 In the terminal:
 #+begin_src shell
   ssh wrds_username@wrds-cloud.wharton.upenn.edu
 #+end_src
-
 *** Folder structure
 #+begin_example
 [wrds]
   |___ [crsp]
   |   |___ [sasdata]
   |   |  |___ [m_stock]
-  |   |  |  |___ [dsf.sas7bdat]
-  |   |  |  |___ [...]
-  |   |  |  |___ [msf.sas7bdat]
-  |   |  |  |___ [msf.sas7bndx]
+  |   |  |  |___ dsf.sas7bdat
+  |   |  |  |___ ...
+  |   |  |  |___ msf.sas7bdat
+  |   |  |  |___ msf.sas7bndx
   |   |  |___ [...]
   |   |  |___ [m_indexes]
   |   |___ [...]
@@ -47,20 +45,15 @@ In the terminal:
   
 [] = directory
 #+end_example
-
 *** Navigation in Unix system
 *ls*: list folders and files in current directory
-
 *cd*: move to or open a directory
-
 *cd ..*: move to parent directory
-
 *** SCP to download data 
 #+begin_src shell
   scp wrds_username@wrds-cloud.wharton.upenn.edu:
   /wrds/crsp/sasdata/a_stock/msenames.sas7bdat ~/Desktop/
 #+end_src
-
 *** How to convert SAS data to other formats
 - Method 1: SAS
 Ask IT to install SAS for you if SAS is not available.
@@ -79,6 +72,7 @@ First, install ~pandas~ in your terminal (ask IT to install Python if it is not 
 #+end_src
 
 Then, you can convert data format.
+
 #+begin_src python
   import pandas as pd
 
@@ -91,7 +85,6 @@ Then, you can convert data format.
 #+begin_note
 You can also follow the link ([[https://stats.idre.ucla.edu/other/mult-pkg/faq/how-do-i-use-a-sas-data-file-in-stata/][HOW DO I USE A SAS DATA FILE IN STATA?]]) to check other methods.
 #+end_note
-
 ** SAS connection to WRDS 
 #+begin_src sas
   %let wrds=wrds-cloud.wharton.upenn.edu 4016;
@@ -111,14 +104,12 @@ You can also follow the link ([[https://stats.idre.ucla.edu/other/mult-pkg/faq/h
 
   signoff;
 #+end_src
-
 ** Python connection to WRDS
 *** Install =wrds= package
 In the terminal:
 #+begin_src shell
 pip install wrds
 #+end_src
-
 *** Retrieve data using Python
 #+begin_src python
   import pandas as pd
@@ -135,7 +126,6 @@ pip install wrds
     where date>='01/01/2010'
   """)
 #+end_src
-
 ** Introduction to Stata
 *** Import data into Stata
 #+begin_src stata
@@ -154,7 +144,6 @@ import delimited msenames.csv, clear
 /* Import Excel file */
 import excel msenames.xlsx, firstrow clear
 #+end_src
-
 *** Preview data
 #+begin_src Stata
   use msenames, clear
@@ -166,7 +155,6 @@ import excel msenames.xlsx, firstrow clear
   lookfor com
   list permno cusip ncusip in 1/10
 #+end_src
-
 ** Which software
 *** Data management and data analysis
 - Data management
@@ -194,10 +182,42 @@ import excel msenames.xlsx, firstrow clear
 
     --- /wrds.us (http://www.wrds.us/index.php/tutorial/view/14)/
 #+end_quote
-** Code management: version control (optional)
-*** Git
-*** Github
-
+** Project management
+*** Example structure
+#+begin_example
+[project]
+      |___ [Code]
+      |   |___ regression.do
+      |   |___ simulation.py
+      |   |___ data_clean.sas
+      |   |___ plot.R 
+      |--- [Data]
+      |   |--- [Raw]
+      |   |  |___ msf.txt
+      |   |  |___ compustat.dta
+      |   |  |___ ibes.csv
+      |   |___ [Processed]
+      |   |  |___ msf_clean.txt
+      |   |  |___ compustat_clean.dta
+      |--- [Tables] 
+      |___ [Figures]
+#+end_example
+*** Code management: vesrsion control (optional)
+**** Git
+- Why Git?
+| Without Git     | With Git  |
+|-----------------+-----------|
+| Origin file.py  | MyCode.py |
+| File_change1.py |           |
+| File_change2.py |           |
+| ...             |           |
+| File_final.py   |           |
+- [[https://towardsdatascience.com/getting-started-with-git-and-github-6fcd0f2d4ac6][See the guidance]]
+**** GitHub
+- GitHub is a platform to host your git repositories.
+- It also provides other user-friendly features, for example, track your file history without command line.
+- [[https://help.github.com/en/articles/create-a-repo][See the guidance]]
+  
 * CRSP and Compustat
 ** CRSP
 *** Data type
@@ -631,7 +651,6 @@ Due to the change of fiscal year end, there are more than one observation for a 
 *** Login
     Follow the steps to login:
     [[./png/tr_login.png]] 
-    [[./png/login_window.png]]    
 *** Enable Datastream (optional)
     If there is no =THOMSON REUTERS DATASTREAM= tab, please click =THOMSON REUTERS= , =Options= and =OK=. Then re-open Excel will make Datastream installed.
     [[./png/tr_app.png]]
