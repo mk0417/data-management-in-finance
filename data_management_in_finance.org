@@ -170,18 +170,22 @@ import excel msenames.xlsx, firstrow clear
   - machine learning
   - parallel computing
 - Python and SAS are more powerful in data management, while R and Stata are more convenient in data analysis, especially econometrics.
-*** Open source and commercial software
-- Python and R are open source
-  - Free
-  - Bug: e.g. here is a bug in Pandas 0.25: [[https://github.com/pandas-dev/pandas/issues/27526]]
-- SAS and Stata are commercial software
-  - Need licence and expensive.
 
 #+begin_quote
 /Even though data management and regression can be performed in SAS, some users prefer to use another package to do the 'final' steps. For example, SAS can be used to retrieve and manage the data. The final dataset created in SAS can then be converted for example to STATA format (using StataTrans). STATA can then be used to create the tables with descriptive statistics, correlation tables, and perform (final) regressions and other statistical tests. However, in these tutorials only SAS is covered./
 
     --- /wrds.us (http://www.wrds.us/index.php/tutorial/view/14)/
 #+end_quote
+*** Open source and commercial software
+- Python and R are open source
+  - Free
+  - Bug: e.g. here is a bug in Pandas 0.25: [[https://github.com/pandas-dev/pandas/issues/27526]]
+- SAS and Stata are commercial software
+  - Need licence and expensive.
+*** Tweets from /Tatyana Deryugina/
+[[./png/twitter_td_1.png]]
+[[./png/twitter_td_2.png]]
+[[./png/twitter_td_3.png]]
 ** Project management
 *** Example structure
 #+begin_example
