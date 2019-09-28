@@ -1073,10 +1073,6 @@ The link table will help us on merging CRSP and Compustat.
 
 *** Python
 #+begin_src python
-
-#+end_src
-
-#+begin_src python
   import pandas as pd
   import numpy as np
   import wrds
