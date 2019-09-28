@@ -1052,16 +1052,14 @@ Join the following two tables by *GVKEY* and *DATE*.
 - Right join
 [[./png/rightjoin.png]]
 - Inner join
-[[./png/inner.png]]
+[[./png/innerjoin.png]]
 - Outer join
 [[./png/outerjoin.png]]
 ** How to merge CRSP and Compustat
 *** Which identifier?
 - The permanent identifier is PERMNO in CRSP while is GVKEY in Compustat. So the
   best join strategy is to find PERMNO-GVKEY mapping. CRSP-Compustat Merged (CCM) database just offers the link between PERMNO and GVKEY.
-- What if the CCM is not availalbe. The shared identifier which is available in both databases is CUSIP. CRSP also
-containts NCUSIP (historical CUSIP). So which one you should use to merge the
-two databases? NCUSIP is better and you will see why later.
+- What if the CCM is not availalbe. The shared identifier which is available in both databases is CUSIP. CRSP also containts NCUSIP (historical CUSIP). So which one you should use to merge the two databases? NCUSIP is better and you will see why later.
 *** Procedures
 Assume the CCM is not available.
 1. Generate PERMNO-GVKEY link by NCUSIP. Download =msenames= (contains NCUSIP list for CRSP) and =security= (contains CUSIP list for Compustat) from WRDS cloud (see Lecture 1 for guidance).
