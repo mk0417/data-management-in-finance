@@ -1060,6 +1060,38 @@ Join the following two tables by *GVKEY* and *DATE*.
 - The permanent identifier is PERMNO in CRSP while is GVKEY in Compustat. So the
   best join strategy is to find PERMNO-GVKEY mapping. CRSP-Compustat Merged (CCM) database just offers the link between PERMNO and GVKEY.
 - What if the CCM is not availalbe. The shared identifier which is available in both databases is CUSIP. CRSP also containts NCUSIP (historical CUSIP). So which one you should use to merge the two databases? NCUSIP is better and you will see why later.
+*** What if CUSIP is used?
+| Merge by | Num of matched PERMNO-GVKEY |
+|----------+-----------------------------|
+| NCUSIP   |                       27130 |
+| CUSIP    |                       26771 |
+
+What missed if use CUSIP to map PERMNO-GVKEY pair? For example, *10051-13445* does not exist if CUSIP is used to gernerate link table.
+
+Let's investigate it in detail.
+In =msenames=,
+| PERMNO | NCUSIP   | Compnay name                | CUSIP    |
+|--------+----------+-----------------------------+----------|
+|  10051 | 81733510 | SEQUEL CORP                 | 41043F20 |
+|  10051 | 41043F10 | HANGER ORTHOPEDIC GROUP INC | 41043F20 |
+|  10051 | 41043F20 | HANGER ORTHOPEDIC GROUP INC | 41043F20 |
+|  10051 | 41043F20 | HANGER INC                  | 41043F20 |
+
+In =security=,
+| GVKEY |    CUSIP |
+|-------+----------|
+| 13445 | 81733510 |
+
+Now, you can see clearly why it is missed.
+
+#+begin_quote
+In 1986, Sequel Corporation, a Colorado-based communications company, sold off its cellular phone business and began investing in the orthotics and prosthetics industry. In 1989, Sequel bought J. E. Hanger, Inc., of Washington, DC. At the time of purchase, J. E. Hanger, Inc., was an $8 million business with offices in 11 cities and eight states. Soon after, Sequel changed the name of the company to the Hanger Orthopedic Group. Ivan Sabel, president and chief operating officer, was focused on centralizing the design and manufacturing of the company's prosthetic and orthotic devices and distributing them nationally.
+--- source: https://en.wikipedia.org/wiki/Hanger,_Inc.
+#+end_quote
+
+#+begin_comment
+*Important*: here we use NCUSIP to gernerate PERMNO-GVKEY link. Please do not use NCUSIP to merge CRSP and Compusat directly.
+#+end_comment
 *** Procedures
 Assume the CCM is not available.
 1. Generate PERMNO-GVKEY link by NCUSIP. Download =msenames= (contains NCUSIP list for CRSP) and =security= (contains CUSIP list for Compustat) from WRDS cloud (see Lecture 1 for guidance).
@@ -1185,7 +1217,5 @@ The link table will help us on merging CRSP and Compustat.
 #+end_src
 
 * Asset Pricing
-
 * Corporate Governance
-
 * Event Study
