@@ -1091,9 +1091,9 @@ In 1986, Sequel Corporation, a Colorado-based communications company, sold off i
 --- source: https://en.wikipedia.org/wiki/Hanger,_Inc.
 #+end_quote
 
-#+begin_note
+#+begin_example
 *Important*: here we use NCUSIP to gernerate PERMNO-GVKEY link. Please do not use NCUSIP to merge CRSP and Compusat directly.
-#+end_note
+#+end_example
 *** Procedures
 Assume the CCM is not available.
 1. Generate PERMNO-GVKEY link by NCUSIP. Download =msenames= (contains NCUSIP list for CRSP) and =security= (contains CUSIP list for Compustat) from WRDS cloud (see Lecture 1 for guidance).
