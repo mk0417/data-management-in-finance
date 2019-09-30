@@ -195,15 +195,15 @@ import excel msenames.xlsx, firstrow clear
       |   |___ simulation.py
       |   |___ data_clean.sas
       |   |___ plot.R 
-      |--- [Data]
-      |   |--- [Raw]
+      |___ [Data]
+      |   |___ [Raw]
       |   |  |___ msf.txt
       |   |  |___ compustat.dta
       |   |  |___ ibes.csv
       |   |___ [Processed]
       |   |  |___ msf_clean.txt
       |   |  |___ compustat_clean.dta
-      |--- [Tables] 
+      |___ [Tables] 
       |___ [Figures]
 #+end_example
 *** Code management: vesrsion control (optional)
@@ -241,6 +241,7 @@ For the majority of studies, three main stock exchanges are used in US market an
 CRSP includes different type of securities, for example, common stocks and ETFs. Common stocks are most widely used and =shrcd= can helps us to filter out common shares. =shrcd= with 10 or 11 indicate common shares.
 *** Duplicates
 CRSP data via WRDS website contains duplicated observations. This is caused by corporate events in a month.
+
 [[./png/dup.png]]
 *** Negative stock prices
 CRSP uses average of bid and ask price to replace price if there is no valid closing price for a given data. To distinguish them, CRSP assigns negative sign (-) in front of the average of bid and ask price. It does not mean the price is negative. Therefore, we need to convert them to positive value.
@@ -1086,12 +1087,13 @@ Now, you can see clearly why it is missed.
 
 #+begin_quote
 In 1986, Sequel Corporation, a Colorado-based communications company, sold off its cellular phone business and began investing in the orthotics and prosthetics industry. In 1989, Sequel bought J. E. Hanger, Inc., of Washington, DC. At the time of purchase, J. E. Hanger, Inc., was an $8 million business with offices in 11 cities and eight states. Soon after, Sequel changed the name of the company to the Hanger Orthopedic Group. Ivan Sabel, president and chief operating officer, was focused on centralizing the design and manufacturing of the company's prosthetic and orthotic devices and distributing them nationally.
+
 --- source: https://en.wikipedia.org/wiki/Hanger,_Inc.
 #+end_quote
 
-#+begin_comment
+#+begin_note
 *Important*: here we use NCUSIP to gernerate PERMNO-GVKEY link. Please do not use NCUSIP to merge CRSP and Compusat directly.
-#+end_comment
+#+end_note
 *** Procedures
 Assume the CCM is not available.
 1. Generate PERMNO-GVKEY link by NCUSIP. Download =msenames= (contains NCUSIP list for CRSP) and =security= (contains CUSIP list for Compustat) from WRDS cloud (see Lecture 1 for guidance).
