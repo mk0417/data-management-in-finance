@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-28 Sat 19:14 -->
+<!-- 2019-09-30 Mon 11:40 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Management in Finance</title>
@@ -255,176 +255,177 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org27a8796">1. Access WRDS</a>
+<li><a href="#org2a1b798">1. Access WRDS</a>
 <ul>
-<li><a href="#org6a2d5eb">1.1. Unix access to WRDS</a>
+<li><a href="#orgbe142bd">1.1. Unix access to WRDS</a>
 <ul>
-<li><a href="#org5520ee1">1.1.1. How to access</a></li>
-<li><a href="#org827d856">1.1.2. Folder structure</a></li>
-<li><a href="#orgc59d433">1.1.3. Navigation in Unix system</a></li>
-<li><a href="#orgc6b7d22">1.1.4. SCP to download data</a></li>
-<li><a href="#org857aefe">1.1.5. How to convert SAS data to other formats</a></li>
+<li><a href="#org668fbd3">1.1.1. How to access</a></li>
+<li><a href="#org01659aa">1.1.2. Folder structure</a></li>
+<li><a href="#org03d4b11">1.1.3. Navigation in Unix system</a></li>
+<li><a href="#org3f5177a">1.1.4. SCP to download data</a></li>
+<li><a href="#orgab6f510">1.1.5. How to convert SAS data to other formats</a></li>
 </ul>
 </li>
-<li><a href="#org23f28d6">1.2. SAS connection to WRDS</a></li>
-<li><a href="#org7bc5af4">1.3. Python connection to WRDS</a>
+<li><a href="#org9d4d74d">1.2. SAS connection to WRDS</a></li>
+<li><a href="#org164173f">1.3. Python connection to WRDS</a>
 <ul>
-<li><a href="#org58c103a">1.3.1. Install <code>wrds</code> package</a></li>
-<li><a href="#orge90c07a">1.3.2. Retrieve data using Python</a></li>
+<li><a href="#orgd9f765b">1.3.1. Install <code>wrds</code> package</a></li>
+<li><a href="#org5f21d59">1.3.2. Retrieve data using Python</a></li>
 </ul>
 </li>
-<li><a href="#orgb44ca8f">1.4. Introduction to Stata</a>
+<li><a href="#org59e3256">1.4. Introduction to Stata</a>
 <ul>
-<li><a href="#org7ed468b">1.4.1. Import data into Stata</a></li>
-<li><a href="#orgb264380">1.4.2. Preview data</a></li>
+<li><a href="#org644ca01">1.4.1. Import data into Stata</a></li>
+<li><a href="#org29676ad">1.4.2. Preview data</a></li>
 </ul>
 </li>
-<li><a href="#orgc5a598b">1.5. Which software</a>
+<li><a href="#orgbba7589">1.5. Which software</a>
 <ul>
-<li><a href="#org26bfbb0">1.5.1. Data management and data analysis</a></li>
-<li><a href="#org08019d7">1.5.2. Open source and commercial software</a></li>
-<li><a href="#orgd797b46">1.5.3. Tweets from <i>Tatyana Deryugina</i></a></li>
+<li><a href="#orgb958ed0">1.5.1. Data management and data analysis</a></li>
+<li><a href="#org7731c06">1.5.2. Open source and commercial software</a></li>
+<li><a href="#org09578b4">1.5.3. Tweets from <i>Tatyana Deryugina</i></a></li>
 </ul>
 </li>
-<li><a href="#org4577f4c">1.6. Project management</a>
+<li><a href="#org911e6f4">1.6. Project management</a>
 <ul>
-<li><a href="#org31a837f">1.6.1. Example structure</a></li>
-<li><a href="#org5bb3d4f">1.6.2. Code management: vesrsion control (optional)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#org4b7e99b">2. CRSP and Compustat</a>
-<ul>
-<li><a href="#org55f31d7">2.1. CRSP</a>
-<ul>
-<li><a href="#org8a8506a">2.1.1. Data type</a></li>
-<li><a href="#org750cc15">2.1.2. Stock exchanges</a></li>
-<li><a href="#org0fa0846">2.1.3. Share types</a></li>
-<li><a href="#orgb06ded8">2.1.4. Duplicates</a></li>
-<li><a href="#org4d0bd14">2.1.5. Negative stock prices</a></li>
-<li><a href="#orgfddc2bd">2.1.6. Adjusted price</a></li>
-</ul>
-</li>
-<li><a href="#org2c08189">2.2. Compustat</a>
-<ul>
-<li><a href="#org330cc5d">2.2.1. Unique gvkey-datadate observation.</a></li>
-<li><a href="#orge968260">2.2.2. CUSIP</a></li>
-<li><a href="#orgc815315">2.2.3. Multiple observations in the same year</a></li>
-</ul>
-</li>
-<li><a href="#org5c7e7b5">2.3. Code</a>
-<ul>
-<li><a href="#org180bbcc">2.3.1. Stata</a></li>
-<li><a href="#org8b94cfb">2.3.2. Python</a></li>
+<li><a href="#org883f4f8">1.6.1. Example structure</a></li>
+<li><a href="#org07a1f74">1.6.2. Code management: vesrsion control (optional)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org5fb1993">3. IBES and Thomson Reuters 13-F</a>
+<li><a href="#orgd0d719d">2. CRSP and Compustat</a>
 <ul>
-<li><a href="#org5a9121c">3.1. Understand IBES data</a></li>
-<li><a href="#orgb147393">3.2. Code: summary statistics of IBES data</a>
+<li><a href="#org62832c0">2.1. CRSP</a>
 <ul>
-<li><a href="#org223b75c">3.2.1. Stata</a></li>
-<li><a href="#orgbaace25">3.2.2. Python</a></li>
+<li><a href="#org550d4d1">2.1.1. Data type</a></li>
+<li><a href="#orgd77e911">2.1.2. Stock exchanges</a></li>
+<li><a href="#orgaf7257c">2.1.3. Share types</a></li>
+<li><a href="#orgc2fd821">2.1.4. Duplicates</a></li>
+<li><a href="#orged30bde">2.1.5. Negative stock prices</a></li>
+<li><a href="#orged84609">2.1.6. Adjusted price</a></li>
 </ul>
 </li>
-<li><a href="#org0defd39">3.3. Code: number of institutional investors</a>
+<li><a href="#org943e194">2.2. Compustat</a>
 <ul>
-<li><a href="#org8f2853f">3.3.1. Stata</a></li>
-<li><a href="#org5bfb0cc">3.3.2. Python</a></li>
+<li><a href="#org97a419b">2.2.1. Unique gvkey-datadate observation.</a></li>
+<li><a href="#org68a6cba">2.2.2. CUSIP</a></li>
+<li><a href="#orgd5c3600">2.2.3. Multiple observations in the same year</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#org74e09db">4. Datastream and Thomson OneBanker</a>
+<li><a href="#orgff5e173">2.3. Code</a>
 <ul>
-<li><a href="#orgf1a9114">4.1. Download data from Datastream</a>
-<ul>
-<li><a href="#org9f6aaa4">4.1.1. Login</a></li>
-<li><a href="#orgb990f08">4.1.2. Enable Datastream (optional)</a></li>
-<li><a href="#orgca88b00">4.1.3. Use <code>New Request Table</code> to download data</a></li>
-<li><a href="#org6079b3b">4.1.4. Data structure</a></li>
-</ul>
-</li>
-<li><a href="#org6d0ef97">4.2. Code: transpose data</a>
-<ul>
-<li><a href="#org417b9fe">4.2.1. Stata</a></li>
-<li><a href="#org34b3927">4.2.2. Python</a></li>
+<li><a href="#org27d9226">2.3.1. Stata</a></li>
+<li><a href="#org4be9ed2">2.3.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org2f5da91">5. Compustat Global and Bloomberg</a>
+<li><a href="#org1ee39bf">3. IBES and Thomson Reuters 13-F</a>
 <ul>
-<li><a href="#orgf4c3969">5.1. Global data</a></li>
-<li><a href="#orgde4ff43">5.2. Compustat Global</a>
+<li><a href="#org53d14d0">3.1. Understand IBES data</a></li>
+<li><a href="#org6762154">3.2. Code: summary statistics of IBES data</a>
 <ul>
-<li><a href="#org1b95463">5.2.1. Compustat Global vs Datastream</a></li>
-<li><a href="#org3abf83a">5.2.2. Compustat Global vs Bloomberg</a></li>
+<li><a href="#org0a9c949">3.2.1. Stata</a></li>
+<li><a href="#org1494268">3.2.2. Python</a></li>
 </ul>
 </li>
-<li><a href="#org10bd48e">5.3. Code: Compustat Global</a>
+<li><a href="#org05be238">3.3. Code: number of institutional investors</a>
 <ul>
-<li><a href="#org439f14f">5.3.1. Stata</a></li>
-<li><a href="#orgccb0801">5.3.2. Python</a></li>
-</ul>
-</li>
-<li><a href="#orgdcade02">5.4. Code: Bloomberg</a>
-<ul>
-<li><a href="#org88c67c5">5.4.1. Stata</a></li>
-<li><a href="#org0a56635">5.4.2. Python</a></li>
+<li><a href="#org7defafa">3.3.1. Stata</a></li>
+<li><a href="#orga74c42a">3.3.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org46bf01d">6. Execucomp</a>
+<li><a href="#org10f019a">4. Datastream and Thomson OneBanker</a>
 <ul>
-<li><a href="#orge6c0eac">6.1. Code: Female directors over time</a>
+<li><a href="#orgecf524b">4.1. Download data from Datastream</a>
 <ul>
-<li><a href="#org42f1cb4">6.1.1. Stata</a></li>
-<li><a href="#org657ca8b">6.1.2. Python</a></li>
+<li><a href="#org2ae501f">4.1.1. Login</a></li>
+<li><a href="#org91cfc8a">4.1.2. Enable Datastream (optional)</a></li>
+<li><a href="#org7a38ec4">4.1.3. Use <code>New Request Table</code> to download data</a></li>
+<li><a href="#orgcfc867f">4.1.4. Data structure</a></li>
+</ul>
+</li>
+<li><a href="#orgd8da666">4.2. Code: transpose data</a>
+<ul>
+<li><a href="#orge22b324">4.2.1. Stata</a></li>
+<li><a href="#orgde3ffd0">4.2.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org39d6f5f">7. Merge Datasets</a>
+<li><a href="#orgc0eedab">5. Compustat Global and Bloomberg</a>
 <ul>
-<li><a href="#org53df1dd">7.1. Why need to merge or join datasets?</a></li>
-<li><a href="#orgb5ad3c9">7.2. Types of merge or join</a></li>
-<li><a href="#org1b29e50">7.3. How to merge CRSP and Compustat</a>
+<li><a href="#orgac93cc6">5.1. Global data</a></li>
+<li><a href="#org0d65d04">5.2. Compustat Global</a>
 <ul>
-<li><a href="#org1ba1756">7.3.1. Which identifier?</a></li>
-<li><a href="#org6499624">7.3.2. Procedures</a></li>
+<li><a href="#org289135a">5.2.1. Compustat Global vs Datastream</a></li>
+<li><a href="#org4f16eab">5.2.2. Compustat Global vs Bloomberg</a></li>
 </ul>
 </li>
-<li><a href="#org1ce38f2">7.4. Code: merge CRSP and Compustat (wrds website)</a>
+<li><a href="#org941c348">5.3. Code: Compustat Global</a>
 <ul>
-<li><a href="#org84d17d7">7.4.1. Stata</a></li>
-<li><a href="#org531d4c3">7.4.2. Python</a></li>
+<li><a href="#org42d949c">5.3.1. Stata</a></li>
+<li><a href="#org3214995">5.3.2. Python</a></li>
 </ul>
 </li>
-<li><a href="#orgaa1b9f9">7.5. Code: merge CRSP and Compustat (wrds cloud)</a>
+<li><a href="#org2efcf77">5.4. Code: Bloomberg</a>
 <ul>
-<li><a href="#org1c3a5ed">7.5.1. Python</a></li>
+<li><a href="#org91ac211">5.4.1. Stata</a></li>
+<li><a href="#org91042aa">5.4.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org2a0a39d">8. Asset Pricing</a></li>
-<li><a href="#org63abdd4">9. Corporate Governance</a></li>
-<li><a href="#org9f391d3">10. Event Study</a></li>
+<li><a href="#org5cd7d4b">6. Execucomp</a>
+<ul>
+<li><a href="#org37d80e9">6.1. Code: Female directors over time</a>
+<ul>
+<li><a href="#orgf82682e">6.1.1. Stata</a></li>
+<li><a href="#orgf10941a">6.1.2. Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org7d3661b">7. Merge Datasets</a>
+<ul>
+<li><a href="#orgc9dfb36">7.1. Why need to merge or join datasets?</a></li>
+<li><a href="#org2814b3c">7.2. Types of merge or join</a></li>
+<li><a href="#org6f5cd61">7.3. How to merge CRSP and Compustat</a>
+<ul>
+<li><a href="#org6452483">7.3.1. Which identifier?</a></li>
+<li><a href="#orge55c876">7.3.2. What if CUSIP is used?</a></li>
+<li><a href="#org114dcb3">7.3.3. Procedures</a></li>
+</ul>
+</li>
+<li><a href="#org8c383f9">7.4. Code: merge CRSP and Compustat (wrds website)</a>
+<ul>
+<li><a href="#org49d39f4">7.4.1. Stata</a></li>
+<li><a href="#org15b25f0">7.4.2. Python</a></li>
+</ul>
+</li>
+<li><a href="#orgbd57bb4">7.5. Code: merge CRSP and Compustat (wrds cloud)</a>
+<ul>
+<li><a href="#orgc0a6a90">7.5.1. Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org64b82a7">8. Asset Pricing</a></li>
+<li><a href="#org976a6b8">9. Corporate Governance</a></li>
+<li><a href="#orga79a41e">10. Event Study</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org27a8796" class="outline-2">
-<h2 id="org27a8796"><span class="section-number-2">1</span> Access WRDS</h2>
+<div id="outline-container-org2a1b798" class="outline-2">
+<h2 id="org2a1b798"><span class="section-number-2">1</span> Access WRDS</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org6a2d5eb" class="outline-3">
-<h3 id="org6a2d5eb"><span class="section-number-3">1.1</span> Unix access to WRDS</h3>
+<div id="outline-container-orgbe142bd" class="outline-3">
+<h3 id="orgbe142bd"><span class="section-number-3">1.1</span> Unix access to WRDS</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Unix access to WRDS is useful in two ways:
@@ -461,8 +462,8 @@ Unix access to WRDS is useful in two ways:
 </tbody>
 </table>
 </div>
-<div id="outline-container-org5520ee1" class="outline-4">
-<h4 id="org5520ee1"><span class="section-number-4">1.1.1</span> How to access</h4>
+<div id="outline-container-org668fbd3" class="outline-4">
+<h4 id="org668fbd3"><span class="section-number-4">1.1.1</span> How to access</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 In the terminal:
@@ -473,8 +474,8 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-org827d856" class="outline-4">
-<h4 id="org827d856"><span class="section-number-4">1.1.2</span> Folder structure</h4>
+<div id="outline-container-org01659aa" class="outline-4">
+<h4 id="org01659aa"><span class="section-number-4">1.1.2</span> Folder structure</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <pre class="example">
 [wrds]
@@ -497,8 +498,8 @@ In the terminal:
 </pre>
 </div>
 </div>
-<div id="outline-container-orgc59d433" class="outline-4">
-<h4 id="orgc59d433"><span class="section-number-4">1.1.3</span> Navigation in Unix system</h4>
+<div id="outline-container-org03d4b11" class="outline-4">
+<h4 id="org03d4b11"><span class="section-number-4">1.1.3</span> Navigation in Unix system</h4>
 <div class="outline-text-4" id="text-1-1-3">
 <p>
 <b>ls</b>: list folders and files in current directory
@@ -507,8 +508,8 @@ In the terminal:
 </p>
 </div>
 </div>
-<div id="outline-container-orgc6b7d22" class="outline-4">
-<h4 id="orgc6b7d22"><span class="section-number-4">1.1.4</span> SCP to download data</h4>
+<div id="outline-container-org3f5177a" class="outline-4">
+<h4 id="org3f5177a"><span class="section-number-4">1.1.4</span> SCP to download data</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <div class="org-src-container">
 <pre class="src src-shell">scp wrds_username@wrds-cloud.wharton.upenn.edu:
@@ -517,8 +518,8 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-org857aefe" class="outline-4">
-<h4 id="org857aefe"><span class="section-number-4">1.1.5</span> How to convert SAS data to other formats</h4>
+<div id="outline-container-orgab6f510" class="outline-4">
+<h4 id="orgab6f510"><span class="section-number-4">1.1.5</span> How to convert SAS data to other formats</h4>
 <div class="outline-text-4" id="text-1-1-5">
 <ul class="org-ul">
 <li>Method 1: SAS</li>
@@ -569,8 +570,8 @@ You can also follow the link (<a href="https://stats.idre.ucla.edu/other/mult-pk
 </div>
 </div>
 </div>
-<div id="outline-container-org23f28d6" class="outline-3">
-<h3 id="org23f28d6"><span class="section-number-3">1.2</span> SAS connection to WRDS</h3>
+<div id="outline-container-org9d4d74d" class="outline-3">
+<h3 id="org9d4d74d"><span class="section-number-3">1.2</span> SAS connection to WRDS</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-sas">%let wrds=wrds-cloud.wharton.upenn.edu 4016;
@@ -593,12 +594,12 @@ signoff;
 </div>
 </div>
 </div>
-<div id="outline-container-org7bc5af4" class="outline-3">
-<h3 id="org7bc5af4"><span class="section-number-3">1.3</span> Python connection to WRDS</h3>
+<div id="outline-container-org164173f" class="outline-3">
+<h3 id="org164173f"><span class="section-number-3">1.3</span> Python connection to WRDS</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-org58c103a" class="outline-4">
-<h4 id="org58c103a"><span class="section-number-4">1.3.1</span> Install <code>wrds</code> package</h4>
+<div id="outline-container-orgd9f765b" class="outline-4">
+<h4 id="orgd9f765b"><span class="section-number-4">1.3.1</span> Install <code>wrds</code> package</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 In the terminal:
@@ -609,8 +610,8 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-orge90c07a" class="outline-4">
-<h4 id="orge90c07a"><span class="section-number-4">1.3.2</span> Retrieve data using Python</h4>
+<div id="outline-container-org5f21d59" class="outline-4">
+<h4 id="org5f21d59"><span class="section-number-4">1.3.2</span> Retrieve data using Python</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -631,12 +632,12 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-orgb44ca8f" class="outline-3">
-<h3 id="orgb44ca8f"><span class="section-number-3">1.4</span> Introduction to Stata</h3>
+<div id="outline-container-org59e3256" class="outline-3">
+<h3 id="org59e3256"><span class="section-number-3">1.4</span> Introduction to Stata</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-org7ed468b" class="outline-4">
-<h4 id="org7ed468b"><span class="section-number-4">1.4.1</span> Import data into Stata</h4>
+<div id="outline-container-org644ca01" class="outline-4">
+<h4 id="org644ca01"><span class="section-number-4">1.4.1</span> Import data into Stata</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 <pre class="src src-stata">/* Set working directory */
@@ -657,8 +658,8 @@ import excel msenames.xlsx, firstrow clear
 </div>
 </div>
 </div>
-<div id="outline-container-orgb264380" class="outline-4">
-<h4 id="orgb264380"><span class="section-number-4">1.4.2</span> Preview data</h4>
+<div id="outline-container-org29676ad" class="outline-4">
+<h4 id="org29676ad"><span class="section-number-4">1.4.2</span> Preview data</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
 <pre class="src src-Stata">use msenames, clear
@@ -674,12 +675,12 @@ list permno cusip ncusip in 1/10
 </div>
 </div>
 </div>
-<div id="outline-container-orgc5a598b" class="outline-3">
-<h3 id="orgc5a598b"><span class="section-number-3">1.5</span> Which software</h3>
+<div id="outline-container-orgbba7589" class="outline-3">
+<h3 id="orgbba7589"><span class="section-number-3">1.5</span> Which software</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-org26bfbb0" class="outline-4">
-<h4 id="org26bfbb0"><span class="section-number-4">1.5.1</span> Data management and data analysis</h4>
+<div id="outline-container-orgb958ed0" class="outline-4">
+<h4 id="orgb958ed0"><span class="section-number-4">1.5.1</span> Data management and data analysis</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <ul class="org-ul">
 <li>Data management
@@ -712,8 +713,8 @@ list permno cusip ncusip in 1/10
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org08019d7" class="outline-4">
-<h4 id="org08019d7"><span class="section-number-4">1.5.2</span> Open source and commercial software</h4>
+<div id="outline-container-org7731c06" class="outline-4">
+<h4 id="org7731c06"><span class="section-number-4">1.5.2</span> Open source and commercial software</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <ul class="org-ul">
 <li>Python and R are open source
@@ -728,8 +729,8 @@ list permno cusip ncusip in 1/10
 </ul>
 </div>
 </div>
-<div id="outline-container-orgd797b46" class="outline-4">
-<h4 id="orgd797b46"><span class="section-number-4">1.5.3</span> Tweets from <i>Tatyana Deryugina</i></h4>
+<div id="outline-container-org09578b4" class="outline-4">
+<h4 id="org09578b4"><span class="section-number-4">1.5.3</span> Tweets from <i>Tatyana Deryugina</i></h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 <img src="./png/twitter_td_1.png" alt="twitter_td_1.png" />
@@ -739,12 +740,12 @@ list permno cusip ncusip in 1/10
 </div>
 </div>
 </div>
-<div id="outline-container-org4577f4c" class="outline-3">
-<h3 id="org4577f4c"><span class="section-number-3">1.6</span> Project management</h3>
+<div id="outline-container-org911e6f4" class="outline-3">
+<h3 id="org911e6f4"><span class="section-number-3">1.6</span> Project management</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
-<div id="outline-container-org31a837f" class="outline-4">
-<h4 id="org31a837f"><span class="section-number-4">1.6.1</span> Example structure</h4>
+<div id="outline-container-org883f4f8" class="outline-4">
+<h4 id="org883f4f8"><span class="section-number-4">1.6.1</span> Example structure</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <pre class="example">
 [project]
@@ -753,25 +754,25 @@ list permno cusip ncusip in 1/10
       |   |___ simulation.py
       |   |___ data_clean.sas
       |   |___ plot.R 
-      |--- [Data]
-      |   |--- [Raw]
+      |___ [Data]
+      |   |___ [Raw]
       |   |  |___ msf.txt
       |   |  |___ compustat.dta
       |   |  |___ ibes.csv
       |   |___ [Processed]
       |   |  |___ msf_clean.txt
       |   |  |___ compustat_clean.dta
-      |--- [Tables] 
+      |___ [Tables] 
       |___ [Figures]
 </pre>
 </div>
 </div>
-<div id="outline-container-org5bb3d4f" class="outline-4">
-<h4 id="org5bb3d4f"><span class="section-number-4">1.6.2</span> Code management: vesrsion control (optional)</h4>
+<div id="outline-container-org07a1f74" class="outline-4">
+<h4 id="org07a1f74"><span class="section-number-4">1.6.2</span> Code management: vesrsion control (optional)</h4>
 <div class="outline-text-4" id="text-1-6-2">
 </div>
 <ol class="org-ol">
-<li><a id="org7ae8088"></a>Git<br />
+<li><a id="org04a06e1"></a>Git<br />
 <div class="outline-text-5" id="text-1-6-2-1">
 <ul class="org-ul">
 <li>Why Git?</li>
@@ -822,7 +823,7 @@ list permno cusip ncusip in 1/10
 </ul>
 </div>
 </li>
-<li><a id="orga31fb0a"></a>GitHub<br />
+<li><a id="org267a12c"></a>GitHub<br />
 <div class="outline-text-5" id="text-1-6-2-2">
 <ul class="org-ul">
 <li>GitHub is a platform to host your git repositories.</li>
@@ -836,16 +837,16 @@ list permno cusip ncusip in 1/10
 </div>
 </div>
 
-<div id="outline-container-org4b7e99b" class="outline-2">
-<h2 id="org4b7e99b"><span class="section-number-2">2</span> CRSP and Compustat</h2>
+<div id="outline-container-orgd0d719d" class="outline-2">
+<h2 id="orgd0d719d"><span class="section-number-2">2</span> CRSP and Compustat</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org55f31d7" class="outline-3">
-<h3 id="org55f31d7"><span class="section-number-3">2.1</span> CRSP</h3>
+<div id="outline-container-org62832c0" class="outline-3">
+<h3 id="org62832c0"><span class="section-number-3">2.1</span> CRSP</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org8a8506a" class="outline-4">
-<h4 id="org8a8506a"><span class="section-number-4">2.1.1</span> Data type</h4>
+<div id="outline-container-org550d4d1" class="outline-4">
+<h4 id="org550d4d1"><span class="section-number-4">2.1.1</span> Data type</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 It is important to identify the type of the data, especially for variable
@@ -856,8 +857,8 @@ So the return is in string format after you import raw data from CRSP.
 </p>
 </div>
 </div>
-<div id="outline-container-org750cc15" class="outline-4">
-<h4 id="org750cc15"><span class="section-number-4">2.1.2</span> Stock exchanges</h4>
+<div id="outline-container-orgd77e911" class="outline-4">
+<h4 id="orgd77e911"><span class="section-number-4">2.1.2</span> Stock exchanges</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 For the majority of studies, three main stock exchanges are used in US market and <code>exchcd</code> allows us to filter them out.
@@ -895,33 +896,38 @@ For the majority of studies, three main stock exchanges are used in US market an
 </table>
 </div>
 </div>
-<div id="outline-container-org0fa0846" class="outline-4">
-<h4 id="org0fa0846"><span class="section-number-4">2.1.3</span> Share types</h4>
+<div id="outline-container-orgaf7257c" class="outline-4">
+<h4 id="orgaf7257c"><span class="section-number-4">2.1.3</span> Share types</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 CRSP includes different type of securities, for example, common stocks and ETFs. Common stocks are most widely used and <code>shrcd</code> can helps us to filter out common shares. <code>shrcd</code> with 10 or 11 indicate common shares.
 </p>
 </div>
 </div>
-<div id="outline-container-orgb06ded8" class="outline-4">
-<h4 id="orgb06ded8"><span class="section-number-4">2.1.4</span> Duplicates</h4>
+<div id="outline-container-orgc2fd821" class="outline-4">
+<h4 id="orgc2fd821"><span class="section-number-4">2.1.4</span> Duplicates</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 CRSP data via WRDS website contains duplicated observations. This is caused by corporate events in a month.
-<img src="./png/dup.png" alt="dup.png" />
+</p>
+
+
+<div class="figure">
+<p><img src="./png/dup.png" alt="dup.png" />
 </p>
 </div>
 </div>
-<div id="outline-container-org4d0bd14" class="outline-4">
-<h4 id="org4d0bd14"><span class="section-number-4">2.1.5</span> Negative stock prices</h4>
+</div>
+<div id="outline-container-orged30bde" class="outline-4">
+<h4 id="orged30bde"><span class="section-number-4">2.1.5</span> Negative stock prices</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 CRSP uses average of bid and ask price to replace price if there is no valid closing price for a given data. To distinguish them, CRSP assigns negative sign (-) in front of the average of bid and ask price. It does not mean the price is negative. Therefore, we need to convert them to positive value.
 </p>
 </div>
 </div>
-<div id="outline-container-orgfddc2bd" class="outline-4">
-<h4 id="orgfddc2bd"><span class="section-number-4">2.1.6</span> Adjusted price</h4>
+<div id="outline-container-orged84609" class="outline-4">
+<h4 id="orged84609"><span class="section-number-4">2.1.6</span> Adjusted price</h4>
 <div class="outline-text-4" id="text-2-1-6">
 <p>
 Stock return calculated by unadjusted price cannot measure the true performance. The unadjusted price should be adjusted before calculating stock return.
@@ -930,12 +936,12 @@ Stock return calculated by unadjusted price cannot measure the true performance.
 </div>
 </div>
 </div>
-<div id="outline-container-org2c08189" class="outline-3">
-<h3 id="org2c08189"><span class="section-number-3">2.2</span> Compustat</h3>
+<div id="outline-container-org943e194" class="outline-3">
+<h3 id="org943e194"><span class="section-number-3">2.2</span> Compustat</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org330cc5d" class="outline-4">
-<h4 id="org330cc5d"><span class="section-number-4">2.2.1</span> Unique gvkey-datadate observation.</h4>
+<div id="outline-container-org97a419b" class="outline-4">
+<h4 id="org97a419b"><span class="section-number-4">2.2.1</span> Unique gvkey-datadate observation.</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <ul class="org-ul">
 <li>WRDS website</li>
@@ -953,16 +959,16 @@ Need to write code to achieve the screening.
 </p>
 </div>
 </div>
-<div id="outline-container-orge968260" class="outline-4">
-<h4 id="orge968260"><span class="section-number-4">2.2.2</span> CUSIP</h4>
+<div id="outline-container-org68a6cba" class="outline-4">
+<h4 id="org68a6cba"><span class="section-number-4">2.2.2</span> CUSIP</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 CUSIP in Compustat is 9-character. Need to convert it to 8-digit CUSIP when merge Compustat and CRSP. To convert 9-digit CUSIP, delete the 9th character.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc815315" class="outline-4">
-<h4 id="orgc815315"><span class="section-number-4">2.2.3</span> Multiple observations in the same year</h4>
+<div id="outline-container-orgd5c3600" class="outline-4">
+<h4 id="orgd5c3600"><span class="section-number-4">2.2.3</span> Multiple observations in the same year</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 Due to the change of fiscal year end, there are more than one observation for a company in the same fiscal year. You can remove such cases or keep the most recent one.
@@ -970,12 +976,12 @@ Due to the change of fiscal year end, there are more than one observation for a 
 </div>
 </div>
 </div>
-<div id="outline-container-org5c7e7b5" class="outline-3">
-<h3 id="org5c7e7b5"><span class="section-number-3">2.3</span> Code</h3>
+<div id="outline-container-orgff5e173" class="outline-3">
+<h3 id="orgff5e173"><span class="section-number-3">2.3</span> Code</h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-org180bbcc" class="outline-4">
-<h4 id="org180bbcc"><span class="section-number-4">2.3.1</span> Stata</h4>
+<div id="outline-container-org27d9226" class="outline-4">
+<h4 id="org27d9226"><span class="section-number-4">2.3.1</span> Stata</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <div class="org-src-container">
 <pre class="src src-stata">clear
@@ -1077,8 +1083,8 @@ table year, c(mean r sd r)
 </div>
 </div>
 
-<div id="outline-container-org8b94cfb" class="outline-4">
-<h4 id="org8b94cfb"><span class="section-number-4">2.3.2</span> Python</h4>
+<div id="outline-container-org4be9ed2" class="outline-4">
+<h4 id="org4be9ed2"><span class="section-number-4">2.3.2</span> Python</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1181,19 +1187,19 @@ funda.to_csv<span style="color: #4078f2;">(</span>join<span style="color: #a626a
 </div>
 </div>
 
-<div id="outline-container-org5fb1993" class="outline-2">
-<h2 id="org5fb1993"><span class="section-number-2">3</span> IBES and Thomson Reuters 13-F</h2>
+<div id="outline-container-org1ee39bf" class="outline-2">
+<h2 id="org1ee39bf"><span class="section-number-2">3</span> IBES and Thomson Reuters 13-F</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org5a9121c" class="outline-3">
-<h3 id="org5a9121c"><span class="section-number-3">3.1</span> Understand IBES data</h3>
+<div id="outline-container-org53d14d0" class="outline-3">
+<h3 id="org53d14d0"><span class="section-number-3">3.1</span> Understand IBES data</h3>
 </div>
-<div id="outline-container-orgb147393" class="outline-3">
-<h3 id="orgb147393"><span class="section-number-3">3.2</span> Code: summary statistics of IBES data</h3>
+<div id="outline-container-org6762154" class="outline-3">
+<h3 id="org6762154"><span class="section-number-3">3.2</span> Code: summary statistics of IBES data</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org223b75c" class="outline-4">
-<h4 id="org223b75c"><span class="section-number-4">3.2.1</span> Stata</h4>
+<div id="outline-container-org0a9c949" class="outline-4">
+<h4 id="org0a9c949"><span class="section-number-4">3.2.1</span> Stata</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1266,8 +1272,8 @@ corr numest meanest stdev
 </div>
 </div>
 
-<div id="outline-container-orgbaace25" class="outline-4">
-<h4 id="orgbaace25"><span class="section-number-4">3.2.2</span> Python</h4>
+<div id="outline-container-org1494268" class="outline-4">
+<h4 id="org1494268"><span class="section-number-4">3.2.2</span> Python</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1323,12 +1329,12 @@ ibes_us<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</sp
 </div>
 </div>
 
-<div id="outline-container-org0defd39" class="outline-3">
-<h3 id="org0defd39"><span class="section-number-3">3.3</span> Code: number of institutional investors</h3>
+<div id="outline-container-org05be238" class="outline-3">
+<h3 id="org05be238"><span class="section-number-3">3.3</span> Code: number of institutional investors</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org8f2853f" class="outline-4">
-<h4 id="org8f2853f"><span class="section-number-4">3.3.1</span> Stata</h4>
+<div id="outline-container-org7defafa" class="outline-4">
+<h4 id="org7defafa"><span class="section-number-4">3.3.1</span> Stata</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1370,8 +1376,8 @@ graph export n_inst.eps, replace
 </div>
 </div>
 
-<div id="outline-container-org5bfb0cc" class="outline-4">
-<h4 id="org5bfb0cc"><span class="section-number-4">3.3.2</span> Python</h4>
+<div id="outline-container-orga74c42a" class="outline-4">
+<h4 id="orga74c42a"><span class="section-number-4">3.3.2</span> Python</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1419,16 +1425,16 @@ plt.show<span style="color: #4078f2;">()</span>
 </div>
 </div>
 
-<div id="outline-container-org74e09db" class="outline-2">
-<h2 id="org74e09db"><span class="section-number-2">4</span> Datastream and Thomson OneBanker</h2>
+<div id="outline-container-org10f019a" class="outline-2">
+<h2 id="org10f019a"><span class="section-number-2">4</span> Datastream and Thomson OneBanker</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgf1a9114" class="outline-3">
-<h3 id="orgf1a9114"><span class="section-number-3">4.1</span> Download data from Datastream</h3>
+<div id="outline-container-orgecf524b" class="outline-3">
+<h3 id="orgecf524b"><span class="section-number-3">4.1</span> Download data from Datastream</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-org9f6aaa4" class="outline-4">
-<h4 id="org9f6aaa4"><span class="section-number-4">4.1.1</span> Login</h4>
+<div id="outline-container-org2ae501f" class="outline-4">
+<h4 id="org2ae501f"><span class="section-number-4">4.1.1</span> Login</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Follow the steps to login:
@@ -1436,8 +1442,8 @@ Follow the steps to login:
 </p>
 </div>
 </div>
-<div id="outline-container-orgb990f08" class="outline-4">
-<h4 id="orgb990f08"><span class="section-number-4">4.1.2</span> Enable Datastream (optional)</h4>
+<div id="outline-container-org91cfc8a" class="outline-4">
+<h4 id="org91cfc8a"><span class="section-number-4">4.1.2</span> Enable Datastream (optional)</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 If there is no <code>THOMSON REUTERS DATASTREAM</code> tab, please click <code>THOMSON REUTERS</code> , <code>Options</code> and <code>OK</code>. Then re-open Excel will make Datastream installed.
@@ -1445,8 +1451,8 @@ If there is no <code>THOMSON REUTERS DATASTREAM</code> tab, please click <code>T
 </p>
 </div>
 </div>
-<div id="outline-container-orgca88b00" class="outline-4">
-<h4 id="orgca88b00"><span class="section-number-4">4.1.3</span> Use <code>New Request Table</code> to download data</h4>
+<div id="outline-container-org7a38ec4" class="outline-4">
+<h4 id="org7a38ec4"><span class="section-number-4">4.1.3</span> Use <code>New Request Table</code> to download data</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 <img src="./png/datastream.png" alt="datastream.png" />
@@ -1462,8 +1468,8 @@ If there is no <code>THOMSON REUTERS DATASTREAM</code> tab, please click <code>T
 </ul>
 </div>
 </div>
-<div id="outline-container-org6079b3b" class="outline-4">
-<h4 id="org6079b3b"><span class="section-number-4">4.1.4</span> Data structure</h4>
+<div id="outline-container-orgcfc867f" class="outline-4">
+<h4 id="orgcfc867f"><span class="section-number-4">4.1.4</span> Data structure</h4>
 <div class="outline-text-4" id="text-4-1-4">
 
 <div class="figure">
@@ -1481,12 +1487,12 @@ Data from Datastream is not panel data format, so you need to transpose the data
 </div>
 </div>
 
-<div id="outline-container-org6d0ef97" class="outline-3">
-<h3 id="org6d0ef97"><span class="section-number-3">4.2</span> Code: transpose data</h3>
+<div id="outline-container-orgd8da666" class="outline-3">
+<h3 id="orgd8da666"><span class="section-number-3">4.2</span> Code: transpose data</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-org417b9fe" class="outline-4">
-<h4 id="org417b9fe"><span class="section-number-4">4.2.1</span> Stata</h4>
+<div id="outline-container-orge22b324" class="outline-4">
+<h4 id="orge22b324"><span class="section-number-4">4.2.1</span> Stata</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1534,8 +1540,8 @@ save datastream_data, replace
 </div>
 </div>
 
-<div id="outline-container-org34b3927" class="outline-4">
-<h4 id="org34b3927"><span class="section-number-4">4.2.2</span> Python</h4>
+<div id="outline-container-orgde3ffd0" class="outline-4">
+<h4 id="orgde3ffd0"><span class="section-number-4">4.2.2</span> Python</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1577,35 +1583,35 @@ fyear1<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</spa
 </div>
 </div>
 
-<div id="outline-container-org2f5da91" class="outline-2">
-<h2 id="org2f5da91"><span class="section-number-2">5</span> Compustat Global and Bloomberg</h2>
+<div id="outline-container-orgc0eedab" class="outline-2">
+<h2 id="orgc0eedab"><span class="section-number-2">5</span> Compustat Global and Bloomberg</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgf4c3969" class="outline-3">
-<h3 id="orgf4c3969"><span class="section-number-3">5.1</span> Global data</h3>
+<div id="outline-container-orgac93cc6" class="outline-3">
+<h3 id="orgac93cc6"><span class="section-number-3">5.1</span> Global data</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 The quality of global data is not as good as US data. You need to do more data cleanings to get rid of potential data errors. 
 </p>
 </div>
 </div>
-<div id="outline-container-orgde4ff43" class="outline-3">
-<h3 id="orgde4ff43"><span class="section-number-3">5.2</span> Compustat Global</h3>
+<div id="outline-container-org0d65d04" class="outline-3">
+<h3 id="org0d65d04"><span class="section-number-3">5.2</span> Compustat Global</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Compustat Global is the global version of Compustat North America. Most variable names of accounting data are the same with Compustat NA. This is very convenient for cross-country studies, as you can use same variables to construct same measurments.
 </p>
 </div>
-<div id="outline-container-org1b95463" class="outline-4">
-<h4 id="org1b95463"><span class="section-number-4">5.2.1</span> Compustat Global vs Datastream</h4>
+<div id="outline-container-org289135a" class="outline-4">
+<h4 id="org289135a"><span class="section-number-4">5.2.1</span> Compustat Global vs Datastream</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 Datastream is a very popular database for global studies which has larger firm coverage than Compustat Global. However, the coverage of Compustat Global improve a lot after 1992.
 </p>
 </div>
 </div>
-<div id="outline-container-org3abf83a" class="outline-4">
-<h4 id="org3abf83a"><span class="section-number-4">5.2.2</span> Compustat Global vs Bloomberg</h4>
+<div id="outline-container-org4f16eab" class="outline-4">
+<h4 id="org4f16eab"><span class="section-number-4">5.2.2</span> Compustat Global vs Bloomberg</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 Bloomberg is another useful source to find international data. It provides many alternative data, e.g. twitter sentiment and news heat. However, its return and accounting data are not well accepted by top journals because the survivorship bias.
@@ -1613,12 +1619,12 @@ Bloomberg is another useful source to find international data. It provides many 
 </div>
 </div>
 </div>
-<div id="outline-container-org10bd48e" class="outline-3">
-<h3 id="org10bd48e"><span class="section-number-3">5.3</span> Code: Compustat Global</h3>
+<div id="outline-container-org941c348" class="outline-3">
+<h3 id="org941c348"><span class="section-number-3">5.3</span> Code: Compustat Global</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
-<div id="outline-container-org439f14f" class="outline-4">
-<h4 id="org439f14f"><span class="section-number-4">5.3.1</span> Stata</h4>
+<div id="outline-container-org42d949c" class="outline-4">
+<h4 id="org42d949c"><span class="section-number-4">5.3.1</span> Stata</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1700,8 +1706,8 @@ count if ret!=.
 </div>
 </div>
 
-<div id="outline-container-orgccb0801" class="outline-4">
-<h4 id="orgccb0801"><span class="section-number-4">5.3.2</span> Python</h4>
+<div id="outline-container-org3214995" class="outline-4">
+<h4 id="org3214995"><span class="section-number-4">5.3.2</span> Python</h4>
 <div class="outline-text-4" id="text-5-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1770,12 +1776,12 @@ uk_month<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'mon
 </div>
 </div>
 
-<div id="outline-container-orgdcade02" class="outline-3">
-<h3 id="orgdcade02"><span class="section-number-3">5.4</span> Code: Bloomberg</h3>
+<div id="outline-container-org2efcf77" class="outline-3">
+<h3 id="org2efcf77"><span class="section-number-3">5.4</span> Code: Bloomberg</h3>
 <div class="outline-text-3" id="text-5-4">
 </div>
-<div id="outline-container-org88c67c5" class="outline-4">
-<h4 id="org88c67c5"><span class="section-number-4">5.4.1</span> Stata</h4>
+<div id="outline-container-org91ac211" class="outline-4">
+<h4 id="org91ac211"><span class="section-number-4">5.4.1</span> Stata</h4>
 <div class="outline-text-4" id="text-5-4-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1806,8 +1812,8 @@ sort firmid date
 </div>
 </div>
 
-<div id="outline-container-org0a56635" class="outline-4">
-<h4 id="org0a56635"><span class="section-number-4">5.4.2</span> Python</h4>
+<div id="outline-container-org91042aa" class="outline-4">
+<h4 id="org91042aa"><span class="section-number-4">5.4.2</span> Python</h4>
 <div class="outline-text-4" id="text-5-4-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1833,16 +1839,16 @@ sort firmid date
 </div>
 </div>
 
-<div id="outline-container-org46bf01d" class="outline-2">
-<h2 id="org46bf01d"><span class="section-number-2">6</span> Execucomp</h2>
+<div id="outline-container-org5cd7d4b" class="outline-2">
+<h2 id="org5cd7d4b"><span class="section-number-2">6</span> Execucomp</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orge6c0eac" class="outline-3">
-<h3 id="orge6c0eac"><span class="section-number-3">6.1</span> Code: Female directors over time</h3>
+<div id="outline-container-org37d80e9" class="outline-3">
+<h3 id="org37d80e9"><span class="section-number-3">6.1</span> Code: Female directors over time</h3>
 <div class="outline-text-3" id="text-6-1">
 </div>
-<div id="outline-container-org42f1cb4" class="outline-4">
-<h4 id="org42f1cb4"><span class="section-number-4">6.1.1</span> Stata</h4>
+<div id="outline-container-orgf82682e" class="outline-4">
+<h4 id="orgf82682e"><span class="section-number-4">6.1.1</span> Stata</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <div class="org-src-container">
 <pre class="src src-stata">clear
@@ -1890,8 +1896,8 @@ graph export pct_female_do.eps, replace
 </div>
 </div>
 
-<div id="outline-container-org657ca8b" class="outline-4">
-<h4 id="org657ca8b"><span class="section-number-4">6.1.2</span> Python</h4>
+<div id="outline-container-orgf10941a" class="outline-4">
+<h4 id="orgf10941a"><span class="section-number-4">6.1.2</span> Python</h4>
 <div class="outline-text-4" id="text-6-1-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1944,12 +1950,12 @@ plt.show<span style="color: #4078f2;">()</span>
 </div>
 </div>
 
-<div id="outline-container-org39d6f5f" class="outline-2">
-<h2 id="org39d6f5f"><span class="section-number-2">7</span> Merge Datasets</h2>
+<div id="outline-container-org7d3661b" class="outline-2">
+<h2 id="org7d3661b"><span class="section-number-2">7</span> Merge Datasets</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org53df1dd" class="outline-3">
-<h3 id="org53df1dd"><span class="section-number-3">7.1</span> Why need to merge or join datasets?</h3>
+<div id="outline-container-orgc9dfb36" class="outline-3">
+<h3 id="orgc9dfb36"><span class="section-number-3">7.1</span> Why need to merge or join datasets?</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 There is no single dataset which can provide all information for variables.For
@@ -1957,8 +1963,8 @@ example, to calculate book-to-market ratio, you need both market and accounting 
 </p>
 </div>
 </div>
-<div id="outline-container-orgb5ad3c9" class="outline-3">
-<h3 id="orgb5ad3c9"><span class="section-number-3">7.2</span> Types of merge or join</h3>
+<div id="outline-container-org2814b3c" class="outline-3">
+<h3 id="org2814b3c"><span class="section-number-3">7.2</span> Types of merge or join</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Join the following two tables by <b>GVKEY</b> and <b>DATE</b>.
@@ -1998,12 +2004,12 @@ Join the following two tables by <b>GVKEY</b> and <b>DATE</b>.
 </div>
 </div>
 </div>
-<div id="outline-container-org1b29e50" class="outline-3">
-<h3 id="org1b29e50"><span class="section-number-3">7.3</span> How to merge CRSP and Compustat</h3>
+<div id="outline-container-org6f5cd61" class="outline-3">
+<h3 id="org6f5cd61"><span class="section-number-3">7.3</span> How to merge CRSP and Compustat</h3>
 <div class="outline-text-3" id="text-7-3">
 </div>
-<div id="outline-container-org1ba1756" class="outline-4">
-<h4 id="org1ba1756"><span class="section-number-4">7.3.1</span> Which identifier?</h4>
+<div id="outline-container-org6452483" class="outline-4">
+<h4 id="org6452483"><span class="section-number-4">7.3.1</span> Which identifier?</h4>
 <div class="outline-text-4" id="text-7-3-1">
 <ul class="org-ul">
 <li>The permanent identifier is PERMNO in CRSP while is GVKEY in Compustat. So the
@@ -2012,9 +2018,145 @@ best join strategy is to find PERMNO-GVKEY mapping. CRSP-Compustat Merged (CCM) 
 </ul>
 </div>
 </div>
-<div id="outline-container-org6499624" class="outline-4">
-<h4 id="org6499624"><span class="section-number-4">7.3.2</span> Procedures</h4>
+<div id="outline-container-orge55c876" class="outline-4">
+<h4 id="orge55c876"><span class="section-number-4">7.3.2</span> What if CUSIP is used?</h4>
 <div class="outline-text-4" id="text-7-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Merge by</th>
+<th scope="col" class="org-right">Num of matched PERMNO-GVKEY</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">NCUSIP</td>
+<td class="org-right">27130</td>
+</tr>
+
+<tr>
+<td class="org-left">CUSIP</td>
+<td class="org-right">26771</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+What missed if use CUSIP to map PERMNO-GVKEY pair? For example, <b>10051-13445</b> does not exist if CUSIP is used to gernerate link table.
+</p>
+
+<p>
+Let's investigate it in detail.
+In <code>msenames</code>,
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">PERMNO</th>
+<th scope="col" class="org-left">NCUSIP</th>
+<th scope="col" class="org-left">Compnay name</th>
+<th scope="col" class="org-left">CUSIP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">10051</td>
+<td class="org-left">81733510</td>
+<td class="org-left">SEQUEL CORP</td>
+<td class="org-left">41043F20</td>
+</tr>
+
+<tr>
+<td class="org-right">10051</td>
+<td class="org-left">41043F10</td>
+<td class="org-left">HANGER ORTHOPEDIC GROUP INC</td>
+<td class="org-left">41043F20</td>
+</tr>
+
+<tr>
+<td class="org-right">10051</td>
+<td class="org-left">41043F20</td>
+<td class="org-left">HANGER ORTHOPEDIC GROUP INC</td>
+<td class="org-left">41043F20</td>
+</tr>
+
+<tr>
+<td class="org-right">10051</td>
+<td class="org-left">41043F20</td>
+<td class="org-left">HANGER INC</td>
+<td class="org-left">41043F20</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+In <code>security</code>,
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">GVKEY</th>
+<th scope="col" class="org-right">CUSIP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">13445</td>
+<td class="org-right">81733510</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+Now, you can see clearly why it is missed.
+</p>
+
+<blockquote>
+<p>
+In 1986, Sequel Corporation, a Colorado-based communications company, sold off its cellular phone business and began investing in the orthotics and prosthetics industry. In 1989, Sequel bought J. E. Hanger, Inc., of Washington, DC. At the time of purchase, J. E. Hanger, Inc., was an $8 million business with offices in 11 cities and eight states. Soon after, Sequel changed the name of the company to the Hanger Orthopedic Group. Ivan Sabel, president and chief operating officer, was focused on centralizing the design and manufacturing of the company's prosthetic and orthotic devices and distributing them nationally.
+</p>
+
+<p>
+&#x2014; source: <a href="https://en.wikipedia.org/wiki/Hanger,_Inc">https://en.wikipedia.org/wiki/Hanger,_Inc</a>.
+</p>
+</blockquote>
+
+<div class="note">
+<p>
+<b>Important</b>: here we use NCUSIP to gernerate PERMNO-GVKEY link. Please do not use NCUSIP to merge CRSP and Compusat directly.
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org114dcb3" class="outline-4">
+<h4 id="org114dcb3"><span class="section-number-4">7.3.3</span> Procedures</h4>
+<div class="outline-text-4" id="text-7-3-3">
 <p>
 Assume the CCM is not available.
 </p>
@@ -2028,12 +2170,12 @@ The link table will help us on merging CRSP and Compustat.
 </div>
 </div>
 </div>
-<div id="outline-container-org1ce38f2" class="outline-3">
-<h3 id="org1ce38f2"><span class="section-number-3">7.4</span> Code: merge CRSP and Compustat (wrds website)</h3>
+<div id="outline-container-org8c383f9" class="outline-3">
+<h3 id="org8c383f9"><span class="section-number-3">7.4</span> Code: merge CRSP and Compustat (wrds website)</h3>
 <div class="outline-text-3" id="text-7-4">
 </div>
-<div id="outline-container-org84d17d7" class="outline-4">
-<h4 id="org84d17d7"><span class="section-number-4">7.4.1</span> Stata</h4>
+<div id="outline-container-org49d39f4" class="outline-4">
+<h4 id="org49d39f4"><span class="section-number-4">7.4.1</span> Stata</h4>
 <div class="outline-text-4" id="text-7-4-1">
 <div class="org-src-container">
 <pre class="src src-stata">
@@ -2042,8 +2184,8 @@ The link table will help us on merging CRSP and Compustat.
 </div>
 </div>
 
-<div id="outline-container-org531d4c3" class="outline-4">
-<h4 id="org531d4c3"><span class="section-number-4">7.4.2</span> Python</h4>
+<div id="outline-container-org15b25f0" class="outline-4">
+<h4 id="org15b25f0"><span class="section-number-4">7.4.2</span> Python</h4>
 <div class="outline-text-4" id="text-7-4-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -2106,12 +2248,12 @@ os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)<
 </div>
 </div>
 </div>
-<div id="outline-container-orgaa1b9f9" class="outline-3">
-<h3 id="orgaa1b9f9"><span class="section-number-3">7.5</span> Code: merge CRSP and Compustat (wrds cloud)</h3>
+<div id="outline-container-orgbd57bb4" class="outline-3">
+<h3 id="orgbd57bb4"><span class="section-number-3">7.5</span> Code: merge CRSP and Compustat (wrds cloud)</h3>
 <div class="outline-text-3" id="text-7-5">
 </div>
-<div id="outline-container-org1c3a5ed" class="outline-4">
-<h4 id="org1c3a5ed"><span class="section-number-4">7.5.1</span> Python</h4>
+<div id="outline-container-orgc0a6a90" class="outline-4">
+<h4 id="orgc0a6a90"><span class="section-number-4">7.5.1</span> Python</h4>
 <div class="outline-text-4" id="text-7-5-1">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -2171,22 +2313,20 @@ os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)<
 </div>
 </div>
 
-<div id="outline-container-org2a0a39d" class="outline-2">
-<h2 id="org2a0a39d"><span class="section-number-2">8</span> Asset Pricing</h2>
+<div id="outline-container-org64b82a7" class="outline-2">
+<h2 id="org64b82a7"><span class="section-number-2">8</span> Asset Pricing</h2>
 </div>
-
-<div id="outline-container-org63abdd4" class="outline-2">
-<h2 id="org63abdd4"><span class="section-number-2">9</span> Corporate Governance</h2>
+<div id="outline-container-org976a6b8" class="outline-2">
+<h2 id="org976a6b8"><span class="section-number-2">9</span> Corporate Governance</h2>
 </div>
-
-<div id="outline-container-org9f391d3" class="outline-2">
-<h2 id="org9f391d3"><span class="section-number-2">10</span> Event Study</h2>
+<div id="outline-container-orga79a41e" class="outline-2">
+<h2 id="orga79a41e"><span class="section-number-2">10</span> Event Study</h2>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Peng Li</p>
 <p class="email">Email: <a href="mailto:p.li@leeds.ac.uk">p.li@leeds.ac.uk</a></p>
-<p class="date">Created: 2019-09-28 Sat 19:14</p>
+<p class="date">Created: 2019-09-30 Mon 11:40</p>
 </div>
 </body>
 </html>
