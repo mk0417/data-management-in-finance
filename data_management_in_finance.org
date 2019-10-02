@@ -46,9 +46,9 @@ In the terminal:
 [] = directory
 #+end_example
 *** Navigation in Unix system
-*ls*: list folders and files in current directory
-*cd*: move to or open a directory
-*cd ..*: move to parent directory
+- *ls*: list folders and files in current directory
+- *cd*: move to or open a directory
+- *cd ..*: move to parent directory
 *** SCP to download data 
 #+begin_src shell
   scp wrds_username@wrds-cloud.wharton.upenn.edu:
