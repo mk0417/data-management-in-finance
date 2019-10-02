@@ -1107,61 +1107,78 @@ The link table will help us on merging CRSP and Compustat.
 
 *** Python
 #+begin_src python
-  import pandas as pd
-  import numpy as np
-  import wrds
-  import os
-  import warnings
+import pandas as pd
+import numpy as np
+import wrds
+import os
+import warnings
 
-  warnings.filterwarnings('ignore',category=FutureWarning)
+warnings.filterwarnings('ignore',category=FutureWarning)
 
-  wd = 'your working directory path'
-  os.chdir(wd)
-
-
-  # ------------------------------------
-  #    Construct PERMNO-GVKEY link
-  # -------------------------------------
-  msenames = pd.read_csv('msenames.txt',sep='\t',
-      usecols=['permno','cusip','ncusip','comnam'])
-  msenames.columns = msenames.columns.str.lower()
-  msenames = msenames[msenames['ncusip'].notna()]
-  msenames['permno'] = msenames['permno'].astype(int)
-
-  security = pd.read_csv('security.txt',sep='\t',usecols=['gvkey','iid','cusip'])
-  security['cusip'] = security['cusip'].str[:8]
-  security = security.rename(columns={'cusip':'cusip_comp'})
-
-  permno_gvkey = msenames.merge(security,
-      how='inner',left_on='ncusip',right_on='cusip_comp')
-  permno_gvkey = permno_gvkey.drop_duplicates(['permno','gvkey'])
+wd = 'your working directory'
+os.chdir(wd)
 
 
-  # -------------------------------
-  #        Merge datasets
-  # -------------------------------
-  msf = pd.read_csv('merge_crsp_2013_2017.txt',sep='\t')
-  msf.columns = msf.columns.str.lower()
-  msf = msf.query('10<=shrcd<=11 and 1<=exchcd<=3')
-  msf = msf.drop_duplicates(['permno','date'])
-  msf['yyyymm'] = (msf['date']/100).astype(int)
-  msf['me'] = msf['prc'].abs() * msf['shrout'] / 1000
-  msf = msf[msf['me']>0]
+# ------------------------------------
+#    Construct PERMNO-GVKEY link
+# -------------------------------------
+msenames = pd.read_csv('msenames.txt',sep='\t',
+    usecols=['permno','cusip','ncusip','comnam','namedt','nameendt'])
+msenames.columns = msenames.columns.str.lower()
+msenames = msenames[msenames['ncusip'].notna()]
+msenames['permno'] = msenames['permno'].astype(int)
+msenames['namedt'] = pd.to_datetime(msenames['namedt'],format='%Y-%m-%d')
+msenames['nameendt'] = pd.to_datetime(msenames['nameendt'],format='%Y-%m-%d')
+msenames['namedt'] = msenames['namedt'].dt.year*10000 \
+    + msenames['namedt'].dt.month*100 + msenames['namedt'].dt.day
+msenames['nameendt'] = msenames['nameendt'].dt.year*10000 \
+    + msenames['nameendt'].dt.month*100 + msenames['nameendt'].dt.day
 
-  funda = pd.read_csv('merge_compustat.txt',sep='\t')
-  funda = funda.query("indfmt=='INDL' and consol=='C' and popsrc=='D' \
-      and datafmt=='STD' and seq>0")
-  funda = funda.sort_values(['gvkey','datadate']).reset_index(drop=True)
-  funda = funda.drop_duplicates(['gvkey','fyear'],keep='last')
-  funda['yyyymm'] = (funda['datadate']/100).astype(int)
+security = pd.read_csv('security.txt',sep='\t',usecols=['gvkey','iid','cusip'])
+security['cusip'] = security['cusip'].str[:8]
+security = security[~security['iid'].str.contains('C')]
+security = security.rename(columns={'cusip':'cusip_comp'})
 
-  merged = msf[['permno','yyyymm','date','me']] \
-      .merge(permno_gvkey[['permno','gvkey']],how='inner',on='permno') \
-      .merge(funda[['gvkey','datadate','yyyymm','seq']],
-      how='inner',on=['gvkey','yyyymm'])
-  merged = merged.sort_values(['permno','yyyymm','me','seq'])
-  merged = merged.drop_duplicates(['permno','yyyymm'])
-  merged = merged.sort_values(['permno','yyyymm']).reset_index(drop=True)
+permno_gvkey = msenames.merge(security,
+    how='left',left_on='ncusip',right_on='cusip_comp')
+permno_gvkey['gvkey'] = permno_gvkey.groupby('permno') \
+    ['gvkey'].fillna(method='bfill')
+permno_gvkey = permno_gvkey[permno_gvkey['gvkey'].notna()]
+permno_gvkey['begdate'] = permno_gvkey.groupby(['permno','gvkey']) \
+    ['namedt'].transform('min')
+permno_gvkey['enddate'] = permno_gvkey.groupby(['permno','gvkey']) \
+    ['nameendt'].transform('max')
+permno_gvkey = permno_gvkey.drop_duplicates(['permno','gvkey'])
+permno_gvkey = permno_gvkey[['permno','gvkey','begdate','enddate']]
+
+
+# -------------------------------
+#    Data from WRDS website
+# -------------------------------
+msf = pd.read_csv('merge_crsp.txt',sep='\t')
+msf.columns = msf.columns.str.lower()
+msf = msf.query('10<=shrcd<=11 and 1<=exchcd<=3')
+msf = msf.drop_duplicates(['permno','date'])
+msf['yyyymm'] = (msf['date']/100).astype(int)
+msf['me'] = msf['prc'].abs() * msf['shrout'] / 1000
+msf = msf[msf['me']>0]
+
+funda = pd.read_csv('merge_compustat.txt',sep='\t')
+funda = funda.query("indfmt=='INDL' and consol=='C' and popsrc=='D' \
+    and datafmt=='STD' and seq>0")
+funda = funda.sort_values(['gvkey','fyear','datadate']).reset_index(drop=True)
+funda = funda.drop_duplicates(['gvkey','fyear'],keep='last')
+funda['yyyymm'] = (funda['datadate']/100).astype(int)
+
+merged = msf[['permno','yyyymm','date','me']] \
+    .merge(permno_gvkey[['permno','gvkey','begdate','enddate']],
+    how='inner',on='permno')
+merged = merged.query('begdate<=date<=enddate')
+merged = merged.drop_duplicates(['permno','yyyymm'])
+merged= merged.merge(funda[['gvkey','datadate','yyyymm','seq']],
+    how='inner',on=['gvkey','yyyymm'])
+merged = merged.drop_duplicates(['permno','yyyymm'])
+merged = merged.sort_values(['permno','yyyymm']).reset_index(drop=True)
 #+end_src
 ** Code: merge CRSP and Compustat (wrds cloud)
 *** Python
@@ -1178,44 +1195,61 @@ The link table will help us on merging CRSP and Compustat.
   os.chdir(wd)
 
   conn = wrds.Connection()
+  permno_gvkey = conn.raw_sql("""
+      select cast(a.permno as int),b.gvkey,a.namedt,a.nameendt
+      from crsp.msenames a left join
+          (select gvkey,cusip
+          from comp.security
+          where right(iid,1)!='C') b
+      on a.ncusip=substr(b.cusip,1,8)
+      where a.ncusip!=''
+      order by permno,namedt
+  """,date_cols=['namedt','nameendt'])
 
-  merged1 = conn.raw_sql("""
-      select t3.*, t4.datadate, t4.seq, t4.fyear
+  permno_gvkey['gvkey'] = permno_gvkey.groupby('permno') \
+      ['gvkey'].fillna(method='bfill')
+  permno_gvkey = permno_gvkey[permno_gvkey['gvkey'].notna()]
+  permno_gvkey['begdate'] = permno_gvkey.groupby(['permno','gvkey']) \
+      ['namedt'].transform('min')
+  permno_gvkey['enddate'] = permno_gvkey.groupby(['permno','gvkey']) \
+      ['nameendt'].transform('max')
+  permno_gvkey = permno_gvkey.drop_duplicates(['permno','gvkey'])
+  permno_gvkey = permno_gvkey[['permno','gvkey','begdate','enddate']]
+  permno_gvkey = permno_gvkey.sort_values(['permno','gvkey']) \
+      .reset_index(drop=True)
+
+  msf = conn.raw_sql("""
+      select a.*
       from
-      (select t1.*, t2.gvkey
-      from
-      (select cast(a.permno as int), a.date,
-          abs(a.prc)*a.shrout/1000 as me, b.ncusip,
-          cast(date_part('year',cast(date as date)) as int) as year,
-          cast(date_part('month',cast(date as date)) as int) as month
-      from crsp.msf a inner join crsp.msenames b
-      on a.permno = b.permno and a.date>=b.namedt and a.date<=b.nameendt
-      where b.exchcd between 1 and 3 and b.shrcd between 10 and 11
-          and a.date>='01/01/2013' and a.date<='12/31/2017') t1
-      inner join
-      (select distinct cast(c.permno as int), d.gvkey
-      from crsp.msenames c inner join comp.security d
-      on c.ncusip=substr(d.cusip,1,8)
-      where c.ncusip!='') t2
-      on (t1.permno=t2.permno)
-      ) t3
-      inner join
-      (select gvkey, datadate, seq, fyear,
-          cast(date_part('year',cast(datadate as date)) as int) as year,
-          cast(date_part('month',cast(datadate as date)) as int) as month
+      (select cast(a.permno as int),a.date,abs(a.prc)*a.shrout/1000 as me
+      from crsp.msf a left join msenames b
+      on a.permno=b.permno and a.date>=b.namedt and a.date<=b.nameendt
+      where b.shrcd between 10 and 11
+          and b.exchcd between 1 and 3
+          and a.date between '01/01/1975' and '12/31/2017'
+      ) a
+      where me>0
+  """,date_cols=['date'])
+
+  msf = msf.drop_duplicates(['permno','date'])
+  msf['yyyymm'] = msf['date'].dt.year*100 + msf['date'].dt.month
+
+  funda = conn.raw_sql("""
+      select gvkey,datadate,fyear,seq
       from comp.funda
       where indfmt='INDL' and consol='C' and popsrc='D'
-          and datafmt='STD' and curcd='USD' and seq>0
-          and datadate>='01/01/1975' and datadate<='12/31/2017') t4
-      on (t3.gvkey=t4.gvkey and t3.year=t4.year and t3.month=t4.month)
-      where t3.me>0
-      """)
+          and datafmt='STD' and seq>0
+          and datadate>='01/01/1975' and datadate<='12/31/2017'
+  """,date_cols=['datadate'])
 
-  merged1['yyyymm'] = merged1['year']*100 + merged1['month']
-  merged1 = merged1.sort_values(['permno','yyyymm','me','seq'])
+  funda['yyyymm'] = funda['datadate'].dt.year*100 + funda['datadate'].dt.month
+  funda = funda.sort_values(['gvkey','fyear','datadate'])
+  funda = funda.drop_duplicates(['gvkey','fyear'],keep='last')
+
+  merged1 = msf.merge(permno_gvkey,how='inner',on='permno')
+  merged1 = merged1.query('begdate<=date<=enddate')
+  merged1 = merged1.merge(funda,how='inner',on=['gvkey','yyyymm'])
   merged1 = merged1.drop_duplicates(['permno','yyyymm'])
-  merged1 = merged1.sort_values(['permno','yyyymm']).reset_index(drop=True)
-
 #+end_src
 
 * Asset Pricing
