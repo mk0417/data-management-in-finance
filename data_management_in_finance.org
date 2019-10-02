@@ -163,12 +163,12 @@ import excel msenames.xlsx, firstrow clear
   - variable construction
   - web scraping
   - handle large datasets
+  - parallel computing
 - Data analysis
   - statistics test
   - regression
   - numerical computation
   - machine learning
-  - parallel computing
 - Python and SAS are more powerful in data management, while R and Stata are more convenient in data analysis, especially econometrics.
 
 #+begin_quote
