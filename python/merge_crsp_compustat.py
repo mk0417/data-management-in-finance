@@ -142,14 +142,13 @@ funda = conn.raw_sql("""
     select gvkey,datadate,fyear,seq
     from comp.funda
     where indfmt='INDL' and consol='C' and popsrc='D'
-        and datafmt='STD' and seq>0
+        and datafmt='STD'and curcd='USD' and seq>0
         and datadate>='01/01/1975' and datadate<='12/31/2017'
 """,date_cols=['datadate'])
 
 funda['yyyymm'] = funda['datadate'].dt.year*100 + funda['datadate'].dt.month
 funda = funda.sort_values(['gvkey','fyear','datadate'])
 funda = funda.drop_duplicates(['gvkey','fyear'],keep='last')
-
 len(funda)
 
 merged1 = msf.merge(permno_gvkey,how='inner',on='permno')
