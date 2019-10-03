@@ -5,7 +5,7 @@ from matplotlib import pyplot as plt
 import os
 
 # Connect to WRDS
-conn = wrds.Connection(wrds_username='lubspl12')
+conn = wrds.Connection()
 
 # Read data
 inst = conn.raw_sql("""
@@ -29,7 +29,7 @@ n_inst1.index = pd.to_datetime(n_inst1.index,format='%Y-%m-%d')
 
 n_inst1.plot(figsize=(8,5))
 plt.tight_layout()
-plt.savefig('/Users/ml/Desktop/data_management/n_inst_py.png')
+plt.savefig('your_path/n_inst_py.png')
 plt.show()
 
 

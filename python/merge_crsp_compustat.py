@@ -6,7 +6,7 @@ import warnings
 
 warnings.filterwarnings('ignore',category=FutureWarning)
 
-wd = '/users/ml/dropbox/teaching/data/'
+wd = ''
 os.chdir(wd)
 
 
@@ -92,7 +92,7 @@ merged = merged.sort_values(['permno','yyyymm']).reset_index(drop=True)
 # ------------------------------------------------------
 #   Connect to WRDS server without downloading data
 # -------------------------------------------------------
-conn = wrds.Connection(wrds_username='lubspl12')
+conn = wrds.Connection()
 
 permno_gvkey = conn.raw_sql("""
     select cast(a.permno as int),b.gvkey,a.namedt,a.nameendt

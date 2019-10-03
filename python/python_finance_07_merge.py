@@ -6,7 +6,7 @@ import warnings
 
 warnings.filterwarnings('ignore',category=FutureWarning)
 
-wd = '/users/ml/dropbox/teaching/data/'
+wd = ''
 os.chdir(wd)
 
 

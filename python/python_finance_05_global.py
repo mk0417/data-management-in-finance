@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 import os
 
-data_dir = '/users/ml/dropbox/teaching/data/'
+data_dir = ''
 
 # Read data
 uk = pd.read_csv(os.path.join(data_dir,'uk.txt'),sep='\t',low_memory=False)
