@@ -1105,7 +1105,7 @@ The link table will help us on merging CRSP and Compustat.
 clear
 set more off
 
-cd "/users/ml/dropbox/teaching/data/"
+cd ""
 
 /*Generate PERMNO-GVKEY link table*/
 import delimited security.txt, clear
