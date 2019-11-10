@@ -1,6 +1,4 @@
 #+TITLE: Data Management in Finance
-#+AUTHOR: Peng Li
-#+EMAIL: p.li@leeds.ac.uk
 # #+STARTUP: showall
 #+OPTIONS: email:t author:t num:t ^:nil
 #+DESCRIPTION: PhD module
