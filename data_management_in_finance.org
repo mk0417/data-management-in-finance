@@ -1,6 +1,6 @@
 #+TITLE: Data Management in Finance
 # #+STARTUP: showall
-#+OPTIONS: email:t author:t num:t ^:nil
+#+OPTIONS: email:nil author:nil num:t ^:nil
 #+DESCRIPTION: PhD module
     
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/setup/theme-readtheorg.setup

@@ -3,12 +3,11 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2019-09-30 Mon 11:40 -->
+<!-- 2019-11-10 Sun 21:18 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Data Management in Finance</title>
 <meta name="generator" content="Org mode" />
-<meta name="author" content="Peng Li" />
 <meta name="description" content="PhD module"
  />
 <style type="text/css">
@@ -255,177 +254,177 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2a1b798">1. Access WRDS</a>
+<li><a href="#org2439255">1. Access WRDS</a>
 <ul>
-<li><a href="#orgbe142bd">1.1. Unix access to WRDS</a>
+<li><a href="#orgd8e7482">1.1. Unix access to WRDS</a>
 <ul>
-<li><a href="#org668fbd3">1.1.1. How to access</a></li>
-<li><a href="#org01659aa">1.1.2. Folder structure</a></li>
-<li><a href="#org03d4b11">1.1.3. Navigation in Unix system</a></li>
-<li><a href="#org3f5177a">1.1.4. SCP to download data</a></li>
-<li><a href="#orgab6f510">1.1.5. How to convert SAS data to other formats</a></li>
+<li><a href="#orge0c020d">1.1.1. How to access</a></li>
+<li><a href="#org6f032d4">1.1.2. Folder structure</a></li>
+<li><a href="#org88a6d53">1.1.3. Navigation in Unix system</a></li>
+<li><a href="#orgdef740d">1.1.4. SCP to download data</a></li>
+<li><a href="#org141e41a">1.1.5. How to convert SAS data to other formats</a></li>
 </ul>
 </li>
-<li><a href="#org9d4d74d">1.2. SAS connection to WRDS</a></li>
-<li><a href="#org164173f">1.3. Python connection to WRDS</a>
+<li><a href="#org626baf4">1.2. SAS connection to WRDS</a></li>
+<li><a href="#orgf5a83b5">1.3. Python connection to WRDS</a>
 <ul>
-<li><a href="#orgd9f765b">1.3.1. Install <code>wrds</code> package</a></li>
-<li><a href="#org5f21d59">1.3.2. Retrieve data using Python</a></li>
+<li><a href="#org9f1b941">1.3.1. Install <code>wrds</code> package</a></li>
+<li><a href="#orgedfb796">1.3.2. Retrieve data using Python</a></li>
 </ul>
 </li>
-<li><a href="#org59e3256">1.4. Introduction to Stata</a>
+<li><a href="#orgb559b31">1.4. Introduction to Stata</a>
 <ul>
-<li><a href="#org644ca01">1.4.1. Import data into Stata</a></li>
-<li><a href="#org29676ad">1.4.2. Preview data</a></li>
+<li><a href="#org2173b16">1.4.1. Import data into Stata</a></li>
+<li><a href="#org0d1c3a3">1.4.2. Preview data</a></li>
 </ul>
 </li>
-<li><a href="#orgbba7589">1.5. Which software</a>
+<li><a href="#org80a4634">1.5. Which software</a>
 <ul>
-<li><a href="#orgb958ed0">1.5.1. Data management and data analysis</a></li>
-<li><a href="#org7731c06">1.5.2. Open source and commercial software</a></li>
-<li><a href="#org09578b4">1.5.3. Tweets from <i>Tatyana Deryugina</i></a></li>
+<li><a href="#org7070544">1.5.1. Data management and data analysis</a></li>
+<li><a href="#orgce812ff">1.5.2. Open source and commercial software</a></li>
+<li><a href="#org581d592">1.5.3. Tweets from <i>Tatyana Deryugina</i></a></li>
 </ul>
 </li>
-<li><a href="#org911e6f4">1.6. Project management</a>
+<li><a href="#org7248d2f">1.6. Project management</a>
 <ul>
-<li><a href="#org883f4f8">1.6.1. Example structure</a></li>
-<li><a href="#org07a1f74">1.6.2. Code management: vesrsion control (optional)</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#orgd0d719d">2. CRSP and Compustat</a>
-<ul>
-<li><a href="#org62832c0">2.1. CRSP</a>
-<ul>
-<li><a href="#org550d4d1">2.1.1. Data type</a></li>
-<li><a href="#orgd77e911">2.1.2. Stock exchanges</a></li>
-<li><a href="#orgaf7257c">2.1.3. Share types</a></li>
-<li><a href="#orgc2fd821">2.1.4. Duplicates</a></li>
-<li><a href="#orged30bde">2.1.5. Negative stock prices</a></li>
-<li><a href="#orged84609">2.1.6. Adjusted price</a></li>
-</ul>
-</li>
-<li><a href="#org943e194">2.2. Compustat</a>
-<ul>
-<li><a href="#org97a419b">2.2.1. Unique gvkey-datadate observation.</a></li>
-<li><a href="#org68a6cba">2.2.2. CUSIP</a></li>
-<li><a href="#orgd5c3600">2.2.3. Multiple observations in the same year</a></li>
-</ul>
-</li>
-<li><a href="#orgff5e173">2.3. Code</a>
-<ul>
-<li><a href="#org27d9226">2.3.1. Stata</a></li>
-<li><a href="#org4be9ed2">2.3.2. Python</a></li>
+<li><a href="#orgbded04a">1.6.1. Example structure</a></li>
+<li><a href="#org3362eda">1.6.2. Code management: vesrsion control (optional)</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org1ee39bf">3. IBES and Thomson Reuters 13-F</a>
+<li><a href="#org629c9e6">2. CRSP and Compustat</a>
 <ul>
-<li><a href="#org53d14d0">3.1. Understand IBES data</a></li>
-<li><a href="#org6762154">3.2. Code: summary statistics of IBES data</a>
+<li><a href="#org08b9c73">2.1. CRSP</a>
 <ul>
-<li><a href="#org0a9c949">3.2.1. Stata</a></li>
-<li><a href="#org1494268">3.2.2. Python</a></li>
+<li><a href="#org2de9636">2.1.1. Data type</a></li>
+<li><a href="#orgd10eb9c">2.1.2. Stock exchanges</a></li>
+<li><a href="#org0243169">2.1.3. Share types</a></li>
+<li><a href="#orgefb41d6">2.1.4. Duplicates</a></li>
+<li><a href="#org02b0280">2.1.5. Negative stock prices</a></li>
+<li><a href="#orgf59d305">2.1.6. Adjusted price</a></li>
 </ul>
 </li>
-<li><a href="#org05be238">3.3. Code: number of institutional investors</a>
+<li><a href="#orgabb868a">2.2. Compustat</a>
 <ul>
-<li><a href="#org7defafa">3.3.1. Stata</a></li>
-<li><a href="#orga74c42a">3.3.2. Python</a></li>
+<li><a href="#org346aa00">2.2.1. Unique gvkey-datadate observation.</a></li>
+<li><a href="#orga1c966c">2.2.2. CUSIP</a></li>
+<li><a href="#org03ec321">2.2.3. Multiple observations in the same year</a></li>
 </ul>
 </li>
-</ul>
-</li>
-<li><a href="#org10f019a">4. Datastream and Thomson OneBanker</a>
+<li><a href="#org1274a57">2.3. Code</a>
 <ul>
-<li><a href="#orgecf524b">4.1. Download data from Datastream</a>
-<ul>
-<li><a href="#org2ae501f">4.1.1. Login</a></li>
-<li><a href="#org91cfc8a">4.1.2. Enable Datastream (optional)</a></li>
-<li><a href="#org7a38ec4">4.1.3. Use <code>New Request Table</code> to download data</a></li>
-<li><a href="#orgcfc867f">4.1.4. Data structure</a></li>
-</ul>
-</li>
-<li><a href="#orgd8da666">4.2. Code: transpose data</a>
-<ul>
-<li><a href="#orge22b324">4.2.1. Stata</a></li>
-<li><a href="#orgde3ffd0">4.2.2. Python</a></li>
+<li><a href="#org3e36aa6">2.3.1. Stata</a></li>
+<li><a href="#org1a48304">2.3.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#orgc0eedab">5. Compustat Global and Bloomberg</a>
+<li><a href="#org38e9ef6">3. IBES and Thomson Reuters 13-F</a>
 <ul>
-<li><a href="#orgac93cc6">5.1. Global data</a></li>
-<li><a href="#org0d65d04">5.2. Compustat Global</a>
+<li><a href="#orgad51b86">3.1. Understand IBES data</a></li>
+<li><a href="#orgb9e8ff6">3.2. Code: summary statistics of IBES data</a>
 <ul>
-<li><a href="#org289135a">5.2.1. Compustat Global vs Datastream</a></li>
-<li><a href="#org4f16eab">5.2.2. Compustat Global vs Bloomberg</a></li>
+<li><a href="#org6bf2931">3.2.1. Stata</a></li>
+<li><a href="#orgece67da">3.2.2. Python</a></li>
 </ul>
 </li>
-<li><a href="#org941c348">5.3. Code: Compustat Global</a>
+<li><a href="#org1de9ae8">3.3. Code: number of institutional investors</a>
 <ul>
-<li><a href="#org42d949c">5.3.1. Stata</a></li>
-<li><a href="#org3214995">5.3.2. Python</a></li>
-</ul>
-</li>
-<li><a href="#org2efcf77">5.4. Code: Bloomberg</a>
-<ul>
-<li><a href="#org91ac211">5.4.1. Stata</a></li>
-<li><a href="#org91042aa">5.4.2. Python</a></li>
+<li><a href="#org5c24a0f">3.3.1. Stata</a></li>
+<li><a href="#orgc6e1fb5">3.3.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org5cd7d4b">6. Execucomp</a>
+<li><a href="#orga03d55a">4. Datastream and Thomson OneBanker</a>
 <ul>
-<li><a href="#org37d80e9">6.1. Code: Female directors over time</a>
+<li><a href="#orgab04d32">4.1. Download data from Datastream</a>
 <ul>
-<li><a href="#orgf82682e">6.1.1. Stata</a></li>
-<li><a href="#orgf10941a">6.1.2. Python</a></li>
+<li><a href="#org160cf40">4.1.1. Login</a></li>
+<li><a href="#orgb47908c">4.1.2. Enable Datastream (optional)</a></li>
+<li><a href="#orgc6f0198">4.1.3. Use <code>New Request Table</code> to download data</a></li>
+<li><a href="#org8227707">4.1.4. Data structure</a></li>
+</ul>
+</li>
+<li><a href="#orgab855dc">4.2. Code: transpose data</a>
+<ul>
+<li><a href="#org42d9d8b">4.2.1. Stata</a></li>
+<li><a href="#orgecfa0e7">4.2.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org7d3661b">7. Merge Datasets</a>
+<li><a href="#org55f5032">5. Compustat Global and Bloomberg</a>
 <ul>
-<li><a href="#orgc9dfb36">7.1. Why need to merge or join datasets?</a></li>
-<li><a href="#org2814b3c">7.2. Types of merge or join</a></li>
-<li><a href="#org6f5cd61">7.3. How to merge CRSP and Compustat</a>
+<li><a href="#org3b490a5">5.1. Global data</a></li>
+<li><a href="#orge8b9d3e">5.2. Compustat Global</a>
 <ul>
-<li><a href="#org6452483">7.3.1. Which identifier?</a></li>
-<li><a href="#orge55c876">7.3.2. What if CUSIP is used?</a></li>
-<li><a href="#org114dcb3">7.3.3. Procedures</a></li>
+<li><a href="#org67af73d">5.2.1. Compustat Global vs Datastream</a></li>
+<li><a href="#org537f834">5.2.2. Compustat Global vs Bloomberg</a></li>
 </ul>
 </li>
-<li><a href="#org8c383f9">7.4. Code: merge CRSP and Compustat (wrds website)</a>
+<li><a href="#org1a70e4e">5.3. Code: Compustat Global</a>
 <ul>
-<li><a href="#org49d39f4">7.4.1. Stata</a></li>
-<li><a href="#org15b25f0">7.4.2. Python</a></li>
+<li><a href="#org533ea32">5.3.1. Stata</a></li>
+<li><a href="#orgb0a6a62">5.3.2. Python</a></li>
 </ul>
 </li>
-<li><a href="#orgbd57bb4">7.5. Code: merge CRSP and Compustat (wrds cloud)</a>
+<li><a href="#org193a6d7">5.4. Code: Bloomberg</a>
 <ul>
-<li><a href="#orgc0a6a90">7.5.1. Python</a></li>
+<li><a href="#org835e9a6">5.4.1. Stata</a></li>
+<li><a href="#orgacbacdc">5.4.2. Python</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org64b82a7">8. Asset Pricing</a></li>
-<li><a href="#org976a6b8">9. Corporate Governance</a></li>
-<li><a href="#orga79a41e">10. Event Study</a></li>
+<li><a href="#org85faa11">6. Execucomp</a>
+<ul>
+<li><a href="#org90f62ab">6.1. Code: Female directors over time</a>
+<ul>
+<li><a href="#orga6b3149">6.1.1. Stata</a></li>
+<li><a href="#orgeb69208">6.1.2. Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgb0a02de">7. Merge Datasets</a>
+<ul>
+<li><a href="#orgd7432b3">7.1. Why need to merge or join datasets?</a></li>
+<li><a href="#org6c67a73">7.2. Types of merge or join</a></li>
+<li><a href="#org6e3a440">7.3. How to merge CRSP and Compustat</a>
+<ul>
+<li><a href="#orge80f1d5">7.3.1. Which identifier?</a></li>
+<li><a href="#orga053e6f">7.3.2. What if CUSIP is used?</a></li>
+<li><a href="#org4c6b35d">7.3.3. Procedures</a></li>
+</ul>
+</li>
+<li><a href="#org8fb3743">7.4. Code: merge CRSP and Compustat (wrds website)</a>
+<ul>
+<li><a href="#orgc5275ed">7.4.1. Stata</a></li>
+<li><a href="#orgf6ee540">7.4.2. Python</a></li>
+</ul>
+</li>
+<li><a href="#org44acb48">7.5. Code: merge CRSP and Compustat (wrds cloud)</a>
+<ul>
+<li><a href="#org08ea3de">7.5.1. Python</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org33d9e90">8. Asset Pricing</a></li>
+<li><a href="#org1b1869d">9. Corporate Governance</a></li>
+<li><a href="#orga2fb18f">10. Event Study</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org2a1b798" class="outline-2">
-<h2 id="org2a1b798"><span class="section-number-2">1</span> Access WRDS</h2>
+<div id="outline-container-org2439255" class="outline-2">
+<h2 id="org2439255"><span class="section-number-2">1</span> Access WRDS</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgbe142bd" class="outline-3">
-<h3 id="orgbe142bd"><span class="section-number-3">1.1</span> Unix access to WRDS</h3>
+<div id="outline-container-orgd8e7482" class="outline-3">
+<h3 id="orgd8e7482"><span class="section-number-3">1.1</span> Unix access to WRDS</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Unix access to WRDS is useful in two ways:
@@ -462,8 +461,8 @@ Unix access to WRDS is useful in two ways:
 </tbody>
 </table>
 </div>
-<div id="outline-container-org668fbd3" class="outline-4">
-<h4 id="org668fbd3"><span class="section-number-4">1.1.1</span> How to access</h4>
+<div id="outline-container-orge0c020d" class="outline-4">
+<h4 id="orge0c020d"><span class="section-number-4">1.1.1</span> How to access</h4>
 <div class="outline-text-4" id="text-1-1-1">
 <p>
 In the terminal:
@@ -474,8 +473,8 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-org01659aa" class="outline-4">
-<h4 id="org01659aa"><span class="section-number-4">1.1.2</span> Folder structure</h4>
+<div id="outline-container-org6f032d4" class="outline-4">
+<h4 id="org6f032d4"><span class="section-number-4">1.1.2</span> Folder structure</h4>
 <div class="outline-text-4" id="text-1-1-2">
 <pre class="example">
 [wrds]
@@ -498,18 +497,18 @@ In the terminal:
 </pre>
 </div>
 </div>
-<div id="outline-container-org03d4b11" class="outline-4">
-<h4 id="org03d4b11"><span class="section-number-4">1.1.3</span> Navigation in Unix system</h4>
+<div id="outline-container-org88a6d53" class="outline-4">
+<h4 id="org88a6d53"><span class="section-number-4">1.1.3</span> Navigation in Unix system</h4>
 <div class="outline-text-4" id="text-1-1-3">
-<p>
-<b>ls</b>: list folders and files in current directory
-<b>cd</b>: move to or open a directory
-<b>cd ..</b>: move to parent directory
-</p>
+<ul class="org-ul">
+<li><b>ls</b>: list folders and files in current directory</li>
+<li><b>cd</b>: move to or open a directory</li>
+<li><b>cd ..</b>: move to parent directory</li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org3f5177a" class="outline-4">
-<h4 id="org3f5177a"><span class="section-number-4">1.1.4</span> SCP to download data</h4>
+<div id="outline-container-orgdef740d" class="outline-4">
+<h4 id="orgdef740d"><span class="section-number-4">1.1.4</span> SCP to download data</h4>
 <div class="outline-text-4" id="text-1-1-4">
 <div class="org-src-container">
 <pre class="src src-shell">scp wrds_username@wrds-cloud.wharton.upenn.edu:
@@ -518,8 +517,8 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-orgab6f510" class="outline-4">
-<h4 id="orgab6f510"><span class="section-number-4">1.1.5</span> How to convert SAS data to other formats</h4>
+<div id="outline-container-org141e41a" class="outline-4">
+<h4 id="org141e41a"><span class="section-number-4">1.1.5</span> How to convert SAS data to other formats</h4>
 <div class="outline-text-4" id="text-1-1-5">
 <ul class="org-ul">
 <li>Method 1: SAS</li>
@@ -570,8 +569,8 @@ You can also follow the link (<a href="https://stats.idre.ucla.edu/other/mult-pk
 </div>
 </div>
 </div>
-<div id="outline-container-org9d4d74d" class="outline-3">
-<h3 id="org9d4d74d"><span class="section-number-3">1.2</span> SAS connection to WRDS</h3>
+<div id="outline-container-org626baf4" class="outline-3">
+<h3 id="org626baf4"><span class="section-number-3">1.2</span> SAS connection to WRDS</h3>
 <div class="outline-text-3" id="text-1-2">
 <div class="org-src-container">
 <pre class="src src-sas">%let wrds=wrds-cloud.wharton.upenn.edu 4016;
@@ -594,12 +593,12 @@ signoff;
 </div>
 </div>
 </div>
-<div id="outline-container-org164173f" class="outline-3">
-<h3 id="org164173f"><span class="section-number-3">1.3</span> Python connection to WRDS</h3>
+<div id="outline-container-orgf5a83b5" class="outline-3">
+<h3 id="orgf5a83b5"><span class="section-number-3">1.3</span> Python connection to WRDS</h3>
 <div class="outline-text-3" id="text-1-3">
 </div>
-<div id="outline-container-orgd9f765b" class="outline-4">
-<h4 id="orgd9f765b"><span class="section-number-4">1.3.1</span> Install <code>wrds</code> package</h4>
+<div id="outline-container-org9f1b941" class="outline-4">
+<h4 id="org9f1b941"><span class="section-number-4">1.3.1</span> Install <code>wrds</code> package</h4>
 <div class="outline-text-4" id="text-1-3-1">
 <p>
 In the terminal:
@@ -610,8 +609,8 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-org5f21d59" class="outline-4">
-<h4 id="org5f21d59"><span class="section-number-4">1.3.2</span> Retrieve data using Python</h4>
+<div id="outline-container-orgedfb796" class="outline-4">
+<h4 id="orgedfb796"><span class="section-number-4">1.3.2</span> Retrieve data using Python</h4>
 <div class="outline-text-4" id="text-1-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -632,12 +631,12 @@ In the terminal:
 </div>
 </div>
 </div>
-<div id="outline-container-org59e3256" class="outline-3">
-<h3 id="org59e3256"><span class="section-number-3">1.4</span> Introduction to Stata</h3>
+<div id="outline-container-orgb559b31" class="outline-3">
+<h3 id="orgb559b31"><span class="section-number-3">1.4</span> Introduction to Stata</h3>
 <div class="outline-text-3" id="text-1-4">
 </div>
-<div id="outline-container-org644ca01" class="outline-4">
-<h4 id="org644ca01"><span class="section-number-4">1.4.1</span> Import data into Stata</h4>
+<div id="outline-container-org2173b16" class="outline-4">
+<h4 id="org2173b16"><span class="section-number-4">1.4.1</span> Import data into Stata</h4>
 <div class="outline-text-4" id="text-1-4-1">
 <div class="org-src-container">
 <pre class="src src-stata">/* Set working directory */
@@ -658,8 +657,8 @@ import excel msenames.xlsx, firstrow clear
 </div>
 </div>
 </div>
-<div id="outline-container-org29676ad" class="outline-4">
-<h4 id="org29676ad"><span class="section-number-4">1.4.2</span> Preview data</h4>
+<div id="outline-container-org0d1c3a3" class="outline-4">
+<h4 id="org0d1c3a3"><span class="section-number-4">1.4.2</span> Preview data</h4>
 <div class="outline-text-4" id="text-1-4-2">
 <div class="org-src-container">
 <pre class="src src-Stata">use msenames, clear
@@ -675,12 +674,12 @@ list permno cusip ncusip in 1/10
 </div>
 </div>
 </div>
-<div id="outline-container-orgbba7589" class="outline-3">
-<h3 id="orgbba7589"><span class="section-number-3">1.5</span> Which software</h3>
+<div id="outline-container-org80a4634" class="outline-3">
+<h3 id="org80a4634"><span class="section-number-3">1.5</span> Which software</h3>
 <div class="outline-text-3" id="text-1-5">
 </div>
-<div id="outline-container-orgb958ed0" class="outline-4">
-<h4 id="orgb958ed0"><span class="section-number-4">1.5.1</span> Data management and data analysis</h4>
+<div id="outline-container-org7070544" class="outline-4">
+<h4 id="org7070544"><span class="section-number-4">1.5.1</span> Data management and data analysis</h4>
 <div class="outline-text-4" id="text-1-5-1">
 <ul class="org-ul">
 <li>Data management
@@ -690,6 +689,7 @@ list permno cusip ncusip in 1/10
 <li>variable construction</li>
 <li>web scraping</li>
 <li>handle large datasets</li>
+<li>parallel computing</li>
 </ul></li>
 <li>Data analysis
 <ul class="org-ul">
@@ -697,7 +697,6 @@ list permno cusip ncusip in 1/10
 <li>regression</li>
 <li>numerical computation</li>
 <li>machine learning</li>
-<li>parallel computing</li>
 </ul></li>
 <li>Python and SAS are more powerful in data management, while R and Stata are more convenient in data analysis, especially econometrics.</li>
 </ul>
@@ -713,8 +712,8 @@ list permno cusip ncusip in 1/10
 </blockquote>
 </div>
 </div>
-<div id="outline-container-org7731c06" class="outline-4">
-<h4 id="org7731c06"><span class="section-number-4">1.5.2</span> Open source and commercial software</h4>
+<div id="outline-container-orgce812ff" class="outline-4">
+<h4 id="orgce812ff"><span class="section-number-4">1.5.2</span> Open source and commercial software</h4>
 <div class="outline-text-4" id="text-1-5-2">
 <ul class="org-ul">
 <li>Python and R are open source
@@ -729,8 +728,8 @@ list permno cusip ncusip in 1/10
 </ul>
 </div>
 </div>
-<div id="outline-container-org09578b4" class="outline-4">
-<h4 id="org09578b4"><span class="section-number-4">1.5.3</span> Tweets from <i>Tatyana Deryugina</i></h4>
+<div id="outline-container-org581d592" class="outline-4">
+<h4 id="org581d592"><span class="section-number-4">1.5.3</span> Tweets from <i>Tatyana Deryugina</i></h4>
 <div class="outline-text-4" id="text-1-5-3">
 <p>
 <img src="./png/twitter_td_1.png" alt="twitter_td_1.png" />
@@ -740,12 +739,12 @@ list permno cusip ncusip in 1/10
 </div>
 </div>
 </div>
-<div id="outline-container-org911e6f4" class="outline-3">
-<h3 id="org911e6f4"><span class="section-number-3">1.6</span> Project management</h3>
+<div id="outline-container-org7248d2f" class="outline-3">
+<h3 id="org7248d2f"><span class="section-number-3">1.6</span> Project management</h3>
 <div class="outline-text-3" id="text-1-6">
 </div>
-<div id="outline-container-org883f4f8" class="outline-4">
-<h4 id="org883f4f8"><span class="section-number-4">1.6.1</span> Example structure</h4>
+<div id="outline-container-orgbded04a" class="outline-4">
+<h4 id="orgbded04a"><span class="section-number-4">1.6.1</span> Example structure</h4>
 <div class="outline-text-4" id="text-1-6-1">
 <pre class="example">
 [project]
@@ -767,12 +766,12 @@ list permno cusip ncusip in 1/10
 </pre>
 </div>
 </div>
-<div id="outline-container-org07a1f74" class="outline-4">
-<h4 id="org07a1f74"><span class="section-number-4">1.6.2</span> Code management: vesrsion control (optional)</h4>
+<div id="outline-container-org3362eda" class="outline-4">
+<h4 id="org3362eda"><span class="section-number-4">1.6.2</span> Code management: vesrsion control (optional)</h4>
 <div class="outline-text-4" id="text-1-6-2">
 </div>
 <ol class="org-ol">
-<li><a id="org04a06e1"></a>Git<br />
+<li><a id="org8e8de05"></a>Git<br />
 <div class="outline-text-5" id="text-1-6-2-1">
 <ul class="org-ul">
 <li>Why Git?</li>
@@ -823,7 +822,7 @@ list permno cusip ncusip in 1/10
 </ul>
 </div>
 </li>
-<li><a id="org267a12c"></a>GitHub<br />
+<li><a id="org86350a2"></a>GitHub<br />
 <div class="outline-text-5" id="text-1-6-2-2">
 <ul class="org-ul">
 <li>GitHub is a platform to host your git repositories.</li>
@@ -837,16 +836,16 @@ list permno cusip ncusip in 1/10
 </div>
 </div>
 
-<div id="outline-container-orgd0d719d" class="outline-2">
-<h2 id="orgd0d719d"><span class="section-number-2">2</span> CRSP and Compustat</h2>
+<div id="outline-container-org629c9e6" class="outline-2">
+<h2 id="org629c9e6"><span class="section-number-2">2</span> CRSP and Compustat</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org62832c0" class="outline-3">
-<h3 id="org62832c0"><span class="section-number-3">2.1</span> CRSP</h3>
+<div id="outline-container-org08b9c73" class="outline-3">
+<h3 id="org08b9c73"><span class="section-number-3">2.1</span> CRSP</h3>
 <div class="outline-text-3" id="text-2-1">
 </div>
-<div id="outline-container-org550d4d1" class="outline-4">
-<h4 id="org550d4d1"><span class="section-number-4">2.1.1</span> Data type</h4>
+<div id="outline-container-org2de9636" class="outline-4">
+<h4 id="org2de9636"><span class="section-number-4">2.1.1</span> Data type</h4>
 <div class="outline-text-4" id="text-2-1-1">
 <p>
 It is important to identify the type of the data, especially for variable
@@ -857,8 +856,8 @@ So the return is in string format after you import raw data from CRSP.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd77e911" class="outline-4">
-<h4 id="orgd77e911"><span class="section-number-4">2.1.2</span> Stock exchanges</h4>
+<div id="outline-container-orgd10eb9c" class="outline-4">
+<h4 id="orgd10eb9c"><span class="section-number-4">2.1.2</span> Stock exchanges</h4>
 <div class="outline-text-4" id="text-2-1-2">
 <p>
 For the majority of studies, three main stock exchanges are used in US market and <code>exchcd</code> allows us to filter them out.
@@ -896,16 +895,16 @@ For the majority of studies, three main stock exchanges are used in US market an
 </table>
 </div>
 </div>
-<div id="outline-container-orgaf7257c" class="outline-4">
-<h4 id="orgaf7257c"><span class="section-number-4">2.1.3</span> Share types</h4>
+<div id="outline-container-org0243169" class="outline-4">
+<h4 id="org0243169"><span class="section-number-4">2.1.3</span> Share types</h4>
 <div class="outline-text-4" id="text-2-1-3">
 <p>
 CRSP includes different type of securities, for example, common stocks and ETFs. Common stocks are most widely used and <code>shrcd</code> can helps us to filter out common shares. <code>shrcd</code> with 10 or 11 indicate common shares.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc2fd821" class="outline-4">
-<h4 id="orgc2fd821"><span class="section-number-4">2.1.4</span> Duplicates</h4>
+<div id="outline-container-orgefb41d6" class="outline-4">
+<h4 id="orgefb41d6"><span class="section-number-4">2.1.4</span> Duplicates</h4>
 <div class="outline-text-4" id="text-2-1-4">
 <p>
 CRSP data via WRDS website contains duplicated observations. This is caused by corporate events in a month.
@@ -918,16 +917,16 @@ CRSP data via WRDS website contains duplicated observations. This is caused by c
 </div>
 </div>
 </div>
-<div id="outline-container-orged30bde" class="outline-4">
-<h4 id="orged30bde"><span class="section-number-4">2.1.5</span> Negative stock prices</h4>
+<div id="outline-container-org02b0280" class="outline-4">
+<h4 id="org02b0280"><span class="section-number-4">2.1.5</span> Negative stock prices</h4>
 <div class="outline-text-4" id="text-2-1-5">
 <p>
 CRSP uses average of bid and ask price to replace price if there is no valid closing price for a given data. To distinguish them, CRSP assigns negative sign (-) in front of the average of bid and ask price. It does not mean the price is negative. Therefore, we need to convert them to positive value.
 </p>
 </div>
 </div>
-<div id="outline-container-orged84609" class="outline-4">
-<h4 id="orged84609"><span class="section-number-4">2.1.6</span> Adjusted price</h4>
+<div id="outline-container-orgf59d305" class="outline-4">
+<h4 id="orgf59d305"><span class="section-number-4">2.1.6</span> Adjusted price</h4>
 <div class="outline-text-4" id="text-2-1-6">
 <p>
 Stock return calculated by unadjusted price cannot measure the true performance. The unadjusted price should be adjusted before calculating stock return.
@@ -936,12 +935,12 @@ Stock return calculated by unadjusted price cannot measure the true performance.
 </div>
 </div>
 </div>
-<div id="outline-container-org943e194" class="outline-3">
-<h3 id="org943e194"><span class="section-number-3">2.2</span> Compustat</h3>
+<div id="outline-container-orgabb868a" class="outline-3">
+<h3 id="orgabb868a"><span class="section-number-3">2.2</span> Compustat</h3>
 <div class="outline-text-3" id="text-2-2">
 </div>
-<div id="outline-container-org97a419b" class="outline-4">
-<h4 id="org97a419b"><span class="section-number-4">2.2.1</span> Unique gvkey-datadate observation.</h4>
+<div id="outline-container-org346aa00" class="outline-4">
+<h4 id="org346aa00"><span class="section-number-4">2.2.1</span> Unique gvkey-datadate observation.</h4>
 <div class="outline-text-4" id="text-2-2-1">
 <ul class="org-ul">
 <li>WRDS website</li>
@@ -959,16 +958,16 @@ Need to write code to achieve the screening.
 </p>
 </div>
 </div>
-<div id="outline-container-org68a6cba" class="outline-4">
-<h4 id="org68a6cba"><span class="section-number-4">2.2.2</span> CUSIP</h4>
+<div id="outline-container-orga1c966c" class="outline-4">
+<h4 id="orga1c966c"><span class="section-number-4">2.2.2</span> CUSIP</h4>
 <div class="outline-text-4" id="text-2-2-2">
 <p>
 CUSIP in Compustat is 9-character. Need to convert it to 8-digit CUSIP when merge Compustat and CRSP. To convert 9-digit CUSIP, delete the 9th character.
 </p>
 </div>
 </div>
-<div id="outline-container-orgd5c3600" class="outline-4">
-<h4 id="orgd5c3600"><span class="section-number-4">2.2.3</span> Multiple observations in the same year</h4>
+<div id="outline-container-org03ec321" class="outline-4">
+<h4 id="org03ec321"><span class="section-number-4">2.2.3</span> Multiple observations in the same year</h4>
 <div class="outline-text-4" id="text-2-2-3">
 <p>
 Due to the change of fiscal year end, there are more than one observation for a company in the same fiscal year. You can remove such cases or keep the most recent one.
@@ -976,12 +975,12 @@ Due to the change of fiscal year end, there are more than one observation for a 
 </div>
 </div>
 </div>
-<div id="outline-container-orgff5e173" class="outline-3">
-<h3 id="orgff5e173"><span class="section-number-3">2.3</span> Code</h3>
+<div id="outline-container-org1274a57" class="outline-3">
+<h3 id="org1274a57"><span class="section-number-3">2.3</span> Code</h3>
 <div class="outline-text-3" id="text-2-3">
 </div>
-<div id="outline-container-org27d9226" class="outline-4">
-<h4 id="org27d9226"><span class="section-number-4">2.3.1</span> Stata</h4>
+<div id="outline-container-org3e36aa6" class="outline-4">
+<h4 id="org3e36aa6"><span class="section-number-4">2.3.1</span> Stata</h4>
 <div class="outline-text-4" id="text-2-3-1">
 <div class="org-src-container">
 <pre class="src src-stata">clear
@@ -1083,8 +1082,8 @@ table year, c(mean r sd r)
 </div>
 </div>
 
-<div id="outline-container-org4be9ed2" class="outline-4">
-<h4 id="org4be9ed2"><span class="section-number-4">2.3.2</span> Python</h4>
+<div id="outline-container-org1a48304" class="outline-4">
+<h4 id="org1a48304"><span class="section-number-4">2.3.2</span> Python</h4>
 <div class="outline-text-4" id="text-2-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1187,19 +1186,19 @@ funda.to_csv<span style="color: #4078f2;">(</span>join<span style="color: #a626a
 </div>
 </div>
 
-<div id="outline-container-org1ee39bf" class="outline-2">
-<h2 id="org1ee39bf"><span class="section-number-2">3</span> IBES and Thomson Reuters 13-F</h2>
+<div id="outline-container-org38e9ef6" class="outline-2">
+<h2 id="org38e9ef6"><span class="section-number-2">3</span> IBES and Thomson Reuters 13-F</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org53d14d0" class="outline-3">
-<h3 id="org53d14d0"><span class="section-number-3">3.1</span> Understand IBES data</h3>
+<div id="outline-container-orgad51b86" class="outline-3">
+<h3 id="orgad51b86"><span class="section-number-3">3.1</span> Understand IBES data</h3>
 </div>
-<div id="outline-container-org6762154" class="outline-3">
-<h3 id="org6762154"><span class="section-number-3">3.2</span> Code: summary statistics of IBES data</h3>
+<div id="outline-container-orgb9e8ff6" class="outline-3">
+<h3 id="orgb9e8ff6"><span class="section-number-3">3.2</span> Code: summary statistics of IBES data</h3>
 <div class="outline-text-3" id="text-3-2">
 </div>
-<div id="outline-container-org0a9c949" class="outline-4">
-<h4 id="org0a9c949"><span class="section-number-4">3.2.1</span> Stata</h4>
+<div id="outline-container-org6bf2931" class="outline-4">
+<h4 id="org6bf2931"><span class="section-number-4">3.2.1</span> Stata</h4>
 <div class="outline-text-4" id="text-3-2-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1272,8 +1271,8 @@ corr numest meanest stdev
 </div>
 </div>
 
-<div id="outline-container-org1494268" class="outline-4">
-<h4 id="org1494268"><span class="section-number-4">3.2.2</span> Python</h4>
+<div id="outline-container-orgece67da" class="outline-4">
+<h4 id="orgece67da"><span class="section-number-4">3.2.2</span> Python</h4>
 <div class="outline-text-4" id="text-3-2-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1329,12 +1328,12 @@ ibes_us<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</sp
 </div>
 </div>
 
-<div id="outline-container-org05be238" class="outline-3">
-<h3 id="org05be238"><span class="section-number-3">3.3</span> Code: number of institutional investors</h3>
+<div id="outline-container-org1de9ae8" class="outline-3">
+<h3 id="org1de9ae8"><span class="section-number-3">3.3</span> Code: number of institutional investors</h3>
 <div class="outline-text-3" id="text-3-3">
 </div>
-<div id="outline-container-org7defafa" class="outline-4">
-<h4 id="org7defafa"><span class="section-number-4">3.3.1</span> Stata</h4>
+<div id="outline-container-org5c24a0f" class="outline-4">
+<h4 id="org5c24a0f"><span class="section-number-4">3.3.1</span> Stata</h4>
 <div class="outline-text-4" id="text-3-3-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1376,8 +1375,8 @@ graph export n_inst.eps, replace
 </div>
 </div>
 
-<div id="outline-container-orga74c42a" class="outline-4">
-<h4 id="orga74c42a"><span class="section-number-4">3.3.2</span> Python</h4>
+<div id="outline-container-orgc6e1fb5" class="outline-4">
+<h4 id="orgc6e1fb5"><span class="section-number-4">3.3.2</span> Python</h4>
 <div class="outline-text-4" id="text-3-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1425,16 +1424,16 @@ plt.show<span style="color: #4078f2;">()</span>
 </div>
 </div>
 
-<div id="outline-container-org10f019a" class="outline-2">
-<h2 id="org10f019a"><span class="section-number-2">4</span> Datastream and Thomson OneBanker</h2>
+<div id="outline-container-orga03d55a" class="outline-2">
+<h2 id="orga03d55a"><span class="section-number-2">4</span> Datastream and Thomson OneBanker</h2>
 <div class="outline-text-2" id="text-4">
 </div>
-<div id="outline-container-orgecf524b" class="outline-3">
-<h3 id="orgecf524b"><span class="section-number-3">4.1</span> Download data from Datastream</h3>
+<div id="outline-container-orgab04d32" class="outline-3">
+<h3 id="orgab04d32"><span class="section-number-3">4.1</span> Download data from Datastream</h3>
 <div class="outline-text-3" id="text-4-1">
 </div>
-<div id="outline-container-org2ae501f" class="outline-4">
-<h4 id="org2ae501f"><span class="section-number-4">4.1.1</span> Login</h4>
+<div id="outline-container-org160cf40" class="outline-4">
+<h4 id="org160cf40"><span class="section-number-4">4.1.1</span> Login</h4>
 <div class="outline-text-4" id="text-4-1-1">
 <p>
 Follow the steps to login:
@@ -1442,8 +1441,8 @@ Follow the steps to login:
 </p>
 </div>
 </div>
-<div id="outline-container-org91cfc8a" class="outline-4">
-<h4 id="org91cfc8a"><span class="section-number-4">4.1.2</span> Enable Datastream (optional)</h4>
+<div id="outline-container-orgb47908c" class="outline-4">
+<h4 id="orgb47908c"><span class="section-number-4">4.1.2</span> Enable Datastream (optional)</h4>
 <div class="outline-text-4" id="text-4-1-2">
 <p>
 If there is no <code>THOMSON REUTERS DATASTREAM</code> tab, please click <code>THOMSON REUTERS</code> , <code>Options</code> and <code>OK</code>. Then re-open Excel will make Datastream installed.
@@ -1451,8 +1450,8 @@ If there is no <code>THOMSON REUTERS DATASTREAM</code> tab, please click <code>T
 </p>
 </div>
 </div>
-<div id="outline-container-org7a38ec4" class="outline-4">
-<h4 id="org7a38ec4"><span class="section-number-4">4.1.3</span> Use <code>New Request Table</code> to download data</h4>
+<div id="outline-container-orgc6f0198" class="outline-4">
+<h4 id="orgc6f0198"><span class="section-number-4">4.1.3</span> Use <code>New Request Table</code> to download data</h4>
 <div class="outline-text-4" id="text-4-1-3">
 <p>
 <img src="./png/datastream.png" alt="datastream.png" />
@@ -1468,8 +1467,8 @@ If there is no <code>THOMSON REUTERS DATASTREAM</code> tab, please click <code>T
 </ul>
 </div>
 </div>
-<div id="outline-container-orgcfc867f" class="outline-4">
-<h4 id="orgcfc867f"><span class="section-number-4">4.1.4</span> Data structure</h4>
+<div id="outline-container-org8227707" class="outline-4">
+<h4 id="org8227707"><span class="section-number-4">4.1.4</span> Data structure</h4>
 <div class="outline-text-4" id="text-4-1-4">
 
 <div class="figure">
@@ -1487,12 +1486,12 @@ Data from Datastream is not panel data format, so you need to transpose the data
 </div>
 </div>
 
-<div id="outline-container-orgd8da666" class="outline-3">
-<h3 id="orgd8da666"><span class="section-number-3">4.2</span> Code: transpose data</h3>
+<div id="outline-container-orgab855dc" class="outline-3">
+<h3 id="orgab855dc"><span class="section-number-3">4.2</span> Code: transpose data</h3>
 <div class="outline-text-3" id="text-4-2">
 </div>
-<div id="outline-container-orge22b324" class="outline-4">
-<h4 id="orge22b324"><span class="section-number-4">4.2.1</span> Stata</h4>
+<div id="outline-container-org42d9d8b" class="outline-4">
+<h4 id="org42d9d8b"><span class="section-number-4">4.2.1</span> Stata</h4>
 <div class="outline-text-4" id="text-4-2-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1540,8 +1539,8 @@ save datastream_data, replace
 </div>
 </div>
 
-<div id="outline-container-orgde3ffd0" class="outline-4">
-<h4 id="orgde3ffd0"><span class="section-number-4">4.2.2</span> Python</h4>
+<div id="outline-container-orgecfa0e7" class="outline-4">
+<h4 id="orgecfa0e7"><span class="section-number-4">4.2.2</span> Python</h4>
 <div class="outline-text-4" id="text-4-2-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1583,35 +1582,35 @@ fyear1<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</spa
 </div>
 </div>
 
-<div id="outline-container-orgc0eedab" class="outline-2">
-<h2 id="orgc0eedab"><span class="section-number-2">5</span> Compustat Global and Bloomberg</h2>
+<div id="outline-container-org55f5032" class="outline-2">
+<h2 id="org55f5032"><span class="section-number-2">5</span> Compustat Global and Bloomberg</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orgac93cc6" class="outline-3">
-<h3 id="orgac93cc6"><span class="section-number-3">5.1</span> Global data</h3>
+<div id="outline-container-org3b490a5" class="outline-3">
+<h3 id="org3b490a5"><span class="section-number-3">5.1</span> Global data</h3>
 <div class="outline-text-3" id="text-5-1">
 <p>
 The quality of global data is not as good as US data. You need to do more data cleanings to get rid of potential data errors. 
 </p>
 </div>
 </div>
-<div id="outline-container-org0d65d04" class="outline-3">
-<h3 id="org0d65d04"><span class="section-number-3">5.2</span> Compustat Global</h3>
+<div id="outline-container-orge8b9d3e" class="outline-3">
+<h3 id="orge8b9d3e"><span class="section-number-3">5.2</span> Compustat Global</h3>
 <div class="outline-text-3" id="text-5-2">
 <p>
 Compustat Global is the global version of Compustat North America. Most variable names of accounting data are the same with Compustat NA. This is very convenient for cross-country studies, as you can use same variables to construct same measurments.
 </p>
 </div>
-<div id="outline-container-org289135a" class="outline-4">
-<h4 id="org289135a"><span class="section-number-4">5.2.1</span> Compustat Global vs Datastream</h4>
+<div id="outline-container-org67af73d" class="outline-4">
+<h4 id="org67af73d"><span class="section-number-4">5.2.1</span> Compustat Global vs Datastream</h4>
 <div class="outline-text-4" id="text-5-2-1">
 <p>
 Datastream is a very popular database for global studies which has larger firm coverage than Compustat Global. However, the coverage of Compustat Global improve a lot after 1992.
 </p>
 </div>
 </div>
-<div id="outline-container-org4f16eab" class="outline-4">
-<h4 id="org4f16eab"><span class="section-number-4">5.2.2</span> Compustat Global vs Bloomberg</h4>
+<div id="outline-container-org537f834" class="outline-4">
+<h4 id="org537f834"><span class="section-number-4">5.2.2</span> Compustat Global vs Bloomberg</h4>
 <div class="outline-text-4" id="text-5-2-2">
 <p>
 Bloomberg is another useful source to find international data. It provides many alternative data, e.g. twitter sentiment and news heat. However, its return and accounting data are not well accepted by top journals because the survivorship bias.
@@ -1619,12 +1618,12 @@ Bloomberg is another useful source to find international data. It provides many 
 </div>
 </div>
 </div>
-<div id="outline-container-org941c348" class="outline-3">
-<h3 id="org941c348"><span class="section-number-3">5.3</span> Code: Compustat Global</h3>
+<div id="outline-container-org1a70e4e" class="outline-3">
+<h3 id="org1a70e4e"><span class="section-number-3">5.3</span> Code: Compustat Global</h3>
 <div class="outline-text-3" id="text-5-3">
 </div>
-<div id="outline-container-org42d949c" class="outline-4">
-<h4 id="org42d949c"><span class="section-number-4">5.3.1</span> Stata</h4>
+<div id="outline-container-org533ea32" class="outline-4">
+<h4 id="org533ea32"><span class="section-number-4">5.3.1</span> Stata</h4>
 <div class="outline-text-4" id="text-5-3-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1706,8 +1705,8 @@ count if ret!=.
 </div>
 </div>
 
-<div id="outline-container-org3214995" class="outline-4">
-<h4 id="org3214995"><span class="section-number-4">5.3.2</span> Python</h4>
+<div id="outline-container-orgb0a6a62" class="outline-4">
+<h4 id="orgb0a6a62"><span class="section-number-4">5.3.2</span> Python</h4>
 <div class="outline-text-4" id="text-5-3-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1776,12 +1775,12 @@ uk_month<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'mon
 </div>
 </div>
 
-<div id="outline-container-org2efcf77" class="outline-3">
-<h3 id="org2efcf77"><span class="section-number-3">5.4</span> Code: Bloomberg</h3>
+<div id="outline-container-org193a6d7" class="outline-3">
+<h3 id="org193a6d7"><span class="section-number-3">5.4</span> Code: Bloomberg</h3>
 <div class="outline-text-3" id="text-5-4">
 </div>
-<div id="outline-container-org91ac211" class="outline-4">
-<h4 id="org91ac211"><span class="section-number-4">5.4.1</span> Stata</h4>
+<div id="outline-container-org835e9a6" class="outline-4">
+<h4 id="org835e9a6"><span class="section-number-4">5.4.1</span> Stata</h4>
 <div class="outline-text-4" id="text-5-4-1">
 <div class="org-src-container">
 <pre class="src src-Stata">clear
@@ -1812,8 +1811,8 @@ sort firmid date
 </div>
 </div>
 
-<div id="outline-container-org91042aa" class="outline-4">
-<h4 id="org91042aa"><span class="section-number-4">5.4.2</span> Python</h4>
+<div id="outline-container-orgacbacdc" class="outline-4">
+<h4 id="orgacbacdc"><span class="section-number-4">5.4.2</span> Python</h4>
 <div class="outline-text-4" id="text-5-4-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1839,16 +1838,16 @@ sort firmid date
 </div>
 </div>
 
-<div id="outline-container-org5cd7d4b" class="outline-2">
-<h2 id="org5cd7d4b"><span class="section-number-2">6</span> Execucomp</h2>
+<div id="outline-container-org85faa11" class="outline-2">
+<h2 id="org85faa11"><span class="section-number-2">6</span> Execucomp</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org37d80e9" class="outline-3">
-<h3 id="org37d80e9"><span class="section-number-3">6.1</span> Code: Female directors over time</h3>
+<div id="outline-container-org90f62ab" class="outline-3">
+<h3 id="org90f62ab"><span class="section-number-3">6.1</span> Code: Female directors over time</h3>
 <div class="outline-text-3" id="text-6-1">
 </div>
-<div id="outline-container-orgf82682e" class="outline-4">
-<h4 id="orgf82682e"><span class="section-number-4">6.1.1</span> Stata</h4>
+<div id="outline-container-orga6b3149" class="outline-4">
+<h4 id="orga6b3149"><span class="section-number-4">6.1.1</span> Stata</h4>
 <div class="outline-text-4" id="text-6-1-1">
 <div class="org-src-container">
 <pre class="src src-stata">clear
@@ -1896,8 +1895,8 @@ graph export pct_female_do.eps, replace
 </div>
 </div>
 
-<div id="outline-container-orgf10941a" class="outline-4">
-<h4 id="orgf10941a"><span class="section-number-4">6.1.2</span> Python</h4>
+<div id="outline-container-orgeb69208" class="outline-4">
+<h4 id="orgeb69208"><span class="section-number-4">6.1.2</span> Python</h4>
 <div class="outline-text-4" id="text-6-1-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -1950,12 +1949,12 @@ plt.show<span style="color: #4078f2;">()</span>
 </div>
 </div>
 
-<div id="outline-container-org7d3661b" class="outline-2">
-<h2 id="org7d3661b"><span class="section-number-2">7</span> Merge Datasets</h2>
+<div id="outline-container-orgb0a02de" class="outline-2">
+<h2 id="orgb0a02de"><span class="section-number-2">7</span> Merge Datasets</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-orgc9dfb36" class="outline-3">
-<h3 id="orgc9dfb36"><span class="section-number-3">7.1</span> Why need to merge or join datasets?</h3>
+<div id="outline-container-orgd7432b3" class="outline-3">
+<h3 id="orgd7432b3"><span class="section-number-3">7.1</span> Why need to merge or join datasets?</h3>
 <div class="outline-text-3" id="text-7-1">
 <p>
 There is no single dataset which can provide all information for variables.For
@@ -1963,8 +1962,8 @@ example, to calculate book-to-market ratio, you need both market and accounting 
 </p>
 </div>
 </div>
-<div id="outline-container-org2814b3c" class="outline-3">
-<h3 id="org2814b3c"><span class="section-number-3">7.2</span> Types of merge or join</h3>
+<div id="outline-container-org6c67a73" class="outline-3">
+<h3 id="org6c67a73"><span class="section-number-3">7.2</span> Types of merge or join</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 Join the following two tables by <b>GVKEY</b> and <b>DATE</b>.
@@ -2004,12 +2003,12 @@ Join the following two tables by <b>GVKEY</b> and <b>DATE</b>.
 </div>
 </div>
 </div>
-<div id="outline-container-org6f5cd61" class="outline-3">
-<h3 id="org6f5cd61"><span class="section-number-3">7.3</span> How to merge CRSP and Compustat</h3>
+<div id="outline-container-org6e3a440" class="outline-3">
+<h3 id="org6e3a440"><span class="section-number-3">7.3</span> How to merge CRSP and Compustat</h3>
 <div class="outline-text-3" id="text-7-3">
 </div>
-<div id="outline-container-org6452483" class="outline-4">
-<h4 id="org6452483"><span class="section-number-4">7.3.1</span> Which identifier?</h4>
+<div id="outline-container-orge80f1d5" class="outline-4">
+<h4 id="orge80f1d5"><span class="section-number-4">7.3.1</span> Which identifier?</h4>
 <div class="outline-text-4" id="text-7-3-1">
 <ul class="org-ul">
 <li>The permanent identifier is PERMNO in CRSP while is GVKEY in Compustat. So the
@@ -2018,8 +2017,8 @@ best join strategy is to find PERMNO-GVKEY mapping. CRSP-Compustat Merged (CCM) 
 </ul>
 </div>
 </div>
-<div id="outline-container-orge55c876" class="outline-4">
-<h4 id="orge55c876"><span class="section-number-4">7.3.2</span> What if CUSIP is used?</h4>
+<div id="outline-container-orga053e6f" class="outline-4">
+<h4 id="orga053e6f"><span class="section-number-4">7.3.2</span> What if CUSIP is used?</h4>
 <div class="outline-text-4" id="text-7-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2146,16 +2145,13 @@ In 1986, Sequel Corporation, a Colorado-based communications company, sold off i
 </p>
 </blockquote>
 
-<div class="note">
-<p>
-<b>Important</b>: here we use NCUSIP to gernerate PERMNO-GVKEY link. Please do not use NCUSIP to merge CRSP and Compusat directly.
-</p>
-
+<pre class="example">
+*Important*: here we use NCUSIP to gernerate PERMNO-GVKEY link. Please do not use NCUSIP to merge CRSP and Compusat directly.
+</pre>
 </div>
 </div>
-</div>
-<div id="outline-container-org114dcb3" class="outline-4">
-<h4 id="org114dcb3"><span class="section-number-4">7.3.3</span> Procedures</h4>
+<div id="outline-container-org4c6b35d" class="outline-4">
+<h4 id="org4c6b35d"><span class="section-number-4">7.3.3</span> Procedures</h4>
 <div class="outline-text-4" id="text-7-3-3">
 <p>
 Assume the CCM is not available.
@@ -2170,22 +2166,93 @@ The link table will help us on merging CRSP and Compustat.
 </div>
 </div>
 </div>
-<div id="outline-container-org8c383f9" class="outline-3">
-<h3 id="org8c383f9"><span class="section-number-3">7.4</span> Code: merge CRSP and Compustat (wrds website)</h3>
+<div id="outline-container-org8fb3743" class="outline-3">
+<h3 id="org8fb3743"><span class="section-number-3">7.4</span> Code: merge CRSP and Compustat (wrds website)</h3>
 <div class="outline-text-3" id="text-7-4">
 </div>
-<div id="outline-container-org49d39f4" class="outline-4">
-<h4 id="org49d39f4"><span class="section-number-4">7.4.1</span> Stata</h4>
+<div id="outline-container-orgc5275ed" class="outline-4">
+<h4 id="orgc5275ed"><span class="section-number-4">7.4.1</span> Stata</h4>
 <div class="outline-text-4" id="text-7-4-1">
 <div class="org-src-container">
-<pre class="src src-stata">
+<pre class="src src-stata">clear
+set more off
+
+cd ""
+
+/*Generate PERMNO-GVKEY link table*/
+import delimited security.txt, clear
+gen _mergecusip = substr(cusip,1,8)
+rename cusip cusip_comp
+keep gvkey _mergecusip
+save _security, replace
+
+import delimited msenames.txt, clear
+keep if ncusip != ""
+gen _mergecusip = ncusip
+gen newnamedt = date(namedt,"YMD")
+gen newnameendt = date(nameendt,"YMD")
+gen long _namedt = year(newnamedt)*10000 + month(newnamedt)*100 + day(newnamedt)
+gen long _nameendt = year(newnameendt)*10000 + month(newnameendt)*100 + day(newnameendt)
+keep permno _mergecusip _namedt _nameendt
+
+merge m:m _mergecusip using _security
+keep if _merge==1 | _merge==3
+drop _merge
+
+gsort permno -_namedt
+by permno: replace gvkey=gvkey[_n-1] if gvkey==.
+bysort permno gvkey: egen long begdate=min(_namedt)
+bysort permno gvkey: egen long enddate=max(_nameendt)
+drop _*
+
+duplicates drop permno gvkey, force
+save _permno_gvkey_link, replace
+
+/*Compustat data*/
+import delimited merge_compustat.txt, clear
+keep if indfmt=="INDL" &amp; consol=="C" &amp; popsrc=="D" &amp; datafmt=="STD" &amp; seq&gt;0 &amp; seq!=.
+sort gvkey fyear datadate
+by gvkey fyear: gen n = _n
+by gvkey fyear: gen n_max = _N
+keep if n==n_max
+gen yyyymm = int(datadate/100)
+keep gvkey datadate fyear yyyymm seq
+save _compustat, replace
+
+/*CRSP data*/
+import delimited merge_crsp.txt, clear
+keep if inlist(shrcd,10,11) &amp; inlist(exchcd,1,2,3)
+duplicates drop permno date, force
+gen yyyymm = int(date/100)
+gen me = abs(prc) * shrout / 1000
+keep if me&gt;0 &amp; me!=.
+keep permno date yyyymm me
+
+/*Merge CRSP and link table*/
+joinby permno using _permno_gvkey_link
+keep if date&gt;=begdate &amp; date&lt;=enddate
+duplicates drop permno yyyymm, force
+
+/*Merge Compustat*/
+merge m:1 gvkey yyyymm using _compustat
+keep if _merge==3
+drop _merge
+duplicates drop permno yyyymm, force
+sort permno yyyymm
+save _merged, replace
+
+/*Clean temporary files*/
+rm _security.dta
+rm _permno_gvkey_link.dta
+rm _compustat.dta
+rm _merged.dta
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org15b25f0" class="outline-4">
-<h4 id="org15b25f0"><span class="section-number-4">7.4.2</span> Python</h4>
+<div id="outline-container-orgf6ee540" class="outline-4">
+<h4 id="orgf6ee540"><span class="section-number-4">7.4.2</span> Python</h4>
 <div class="outline-text-4" id="text-7-4-2">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -2196,7 +2263,7 @@ The link table will help us on merging CRSP and Compustat.
 
 warnings.filterwarnings<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'ignore'</span>,category=<span style="color: #986801;">FutureWarning</span><span style="color: #4078f2;">)</span>
 
-<span style="color: #6a1868;">wd</span> = <span style="color: #50a14f;">'your working directory path'</span>
+<span style="color: #6a1868;">wd</span> = <span style="color: #50a14f;">'your working directory'</span>
 os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)</span>
 
 
@@ -2204,24 +2271,39 @@ os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)<
 <span style="color: #9ca0a4;">#    </span><span style="color: #9ca0a4;">Construct PERMNO-GVKEY link</span>
 <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">-------------------------------------</span>
 <span style="color: #6a1868;">msenames</span> = pd.read_csv<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'msenames.txt'</span>,sep=<span style="color: #50a14f;">'\t'</span>,
-    usecols=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'cusip'</span>,<span style="color: #50a14f;">'ncusip'</span>,<span style="color: #50a14f;">'comnam'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+    usecols=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'cusip'</span>,<span style="color: #50a14f;">'ncusip'</span>,<span style="color: #50a14f;">'comnam'</span>,<span style="color: #50a14f;">'namedt'</span>,<span style="color: #50a14f;">'nameendt'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">msenames.columns</span> = msenames.columns.<span style="color: #a626a4;">str</span>.lower<span style="color: #4078f2;">()</span>
 <span style="color: #6a1868;">msenames</span> = msenames<span style="color: #4078f2;">[</span>msenames<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'ncusip'</span><span style="color: #a626a4;">]</span>.notna<span style="color: #a626a4;">()</span><span style="color: #4078f2;">]</span>
 <span style="color: #6a1868;">msenames</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">]</span> = msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">]</span>.astype<span style="color: #4078f2;">(</span><span style="color: #a626a4;">int</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">msenames</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span> = pd.to_datetime<span style="color: #4078f2;">(</span>msenames<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #a626a4;">]</span>,<span style="color: #a626a4;">format</span>=<span style="color: #50a14f;">'%Y-%m-%d'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">msenames</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span> = pd.to_datetime<span style="color: #4078f2;">(</span>msenames<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #a626a4;">]</span>,<span style="color: #a626a4;">format</span>=<span style="color: #50a14f;">'%Y-%m-%d'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">msenames</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span> = msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span>.dt.year*<span style="color: #da8548; font-weight: bold;">10000</span> \
+    + msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span>.dt.month*<span style="color: #da8548; font-weight: bold;">100</span> + msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span>.dt.day
+<span style="color: #6a1868;">msenames</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span> = msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span>.dt.year*<span style="color: #da8548; font-weight: bold;">10000</span> \
+    + msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span>.dt.month*<span style="color: #da8548; font-weight: bold;">100</span> + msenames<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span>.dt.day
 
 <span style="color: #6a1868;">security</span> = pd.read_csv<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'security.txt'</span>,sep=<span style="color: #50a14f;">'\t'</span>,usecols=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'iid'</span>,<span style="color: #50a14f;">'cusip'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">security</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'cusip'</span><span style="color: #4078f2;">]</span> = security<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'cusip'</span><span style="color: #4078f2;">]</span>.<span style="color: #a626a4;">str</span><span style="color: #4078f2;">[</span>:<span style="color: #da8548; font-weight: bold;">8</span><span style="color: #4078f2;">]</span>
+<span style="color: #6a1868;">security</span> = security<span style="color: #4078f2;">[</span>~security<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'iid'</span><span style="color: #a626a4;">]</span>.<span style="color: #a626a4;">str</span>.contains<span style="color: #a626a4;">(</span><span style="color: #50a14f;">'C'</span><span style="color: #a626a4;">)</span><span style="color: #4078f2;">]</span>
 <span style="color: #6a1868;">security</span> = security.rename<span style="color: #4078f2;">(</span>columns=<span style="color: #a626a4;">{</span><span style="color: #50a14f;">'cusip'</span>:<span style="color: #50a14f;">'cusip_comp'</span><span style="color: #a626a4;">}</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #6a1868;">permno_gvkey</span> = msenames.merge<span style="color: #4078f2;">(</span>security,
-    how=<span style="color: #50a14f;">'inner'</span>,left_on=<span style="color: #50a14f;">'ncusip'</span>,right_on=<span style="color: #50a14f;">'cusip_comp'</span><span style="color: #4078f2;">)</span>
+    how=<span style="color: #50a14f;">'left'</span>,left_on=<span style="color: #50a14f;">'ncusip'</span>,right_on=<span style="color: #50a14f;">'cusip_comp'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'gvkey'</span><span style="color: #4078f2;">]</span> = permno_gvkey.groupby<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">)</span> \
+    <span style="color: #4078f2;">[</span><span style="color: #50a14f;">'gvkey'</span><span style="color: #4078f2;">]</span>.fillna<span style="color: #4078f2;">(</span>method=<span style="color: #50a14f;">'bfill'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey<span style="color: #4078f2;">[</span>permno_gvkey<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span>.notna<span style="color: #a626a4;">()</span><span style="color: #4078f2;">]</span>
+<span style="color: #6a1868;">permno_gvkey</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'begdate'</span><span style="color: #4078f2;">]</span> = permno_gvkey.groupby<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span> \
+    <span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span>.transform<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'min'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'enddate'</span><span style="color: #4078f2;">]</span> = permno_gvkey.groupby<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span> \
+    <span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span>.transform<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'max'</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'begdate'</span>,<span style="color: #50a14f;">'enddate'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">]</span>
 
 
 <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">-------------------------------</span>
-<span style="color: #9ca0a4;">#        </span><span style="color: #9ca0a4;">Merge datasets</span>
+<span style="color: #9ca0a4;">#    </span><span style="color: #9ca0a4;">Data from WRDS website</span>
 <span style="color: #9ca0a4;"># </span><span style="color: #9ca0a4;">-------------------------------</span>
-<span style="color: #6a1868;">msf</span> = pd.read_csv<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'merge_crsp_2013_2017.txt'</span>,sep=<span style="color: #50a14f;">'\t'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">msf</span> = pd.read_csv<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'merge_crsp.txt'</span>,sep=<span style="color: #50a14f;">'\t'</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">msf.columns</span> = msf.columns.<span style="color: #a626a4;">str</span>.lower<span style="color: #4078f2;">()</span>
 <span style="color: #6a1868;">msf</span> = msf.query<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'10&lt;=shrcd&lt;=11 and 1&lt;=exchcd&lt;=3'</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">msf</span> = msf.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'date'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
@@ -2232,15 +2314,17 @@ os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)<
 <span style="color: #6a1868;">funda</span> = pd.read_csv<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'merge_compustat.txt'</span>,sep=<span style="color: #50a14f;">'\t'</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">funda</span> = funda.query<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"indfmt=='INDL' and consol=='C' and popsrc=='D' \</span>
 <span style="color: #50a14f;">    and datafmt=='STD' and seq&gt;0"</span><span style="color: #4078f2;">)</span>
-<span style="color: #6a1868;">funda</span> = funda.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'datadate'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>.reset_index<span style="color: #4078f2;">(</span>drop=<span style="color: #b751b6;">True</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">funda</span> = funda.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'fyear'</span>,<span style="color: #50a14f;">'datadate'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>.reset_index<span style="color: #4078f2;">(</span>drop=<span style="color: #b751b6;">True</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">funda</span> = funda.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'fyear'</span><span style="color: #a626a4;">]</span>,keep=<span style="color: #50a14f;">'last'</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">funda</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'yyyymm'</span><span style="color: #4078f2;">]</span> = <span style="color: #4078f2;">(</span>funda<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'datadate'</span><span style="color: #a626a4;">]</span>/<span style="color: #da8548; font-weight: bold;">100</span><span style="color: #4078f2;">)</span>.astype<span style="color: #4078f2;">(</span><span style="color: #a626a4;">int</span><span style="color: #4078f2;">)</span>
 
 <span style="color: #6a1868;">merged</span> = msf<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span>,<span style="color: #50a14f;">'date'</span>,<span style="color: #50a14f;">'me'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">]</span> \
-    .merge<span style="color: #4078f2;">(</span>permno_gvkey<span style="color: #a626a4;">[</span><span style="color: #50a14f;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #50a14f;">]</span><span style="color: #a626a4;">]</span>,how=<span style="color: #50a14f;">'inner'</span>,on=<span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">)</span> \
-    .merge<span style="color: #4078f2;">(</span>funda<span style="color: #a626a4;">[</span><span style="color: #50a14f;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'datadate'</span>,<span style="color: #50a14f;">'yyyymm'</span>,<span style="color: #50a14f;">'seq'</span><span style="color: #50a14f;">]</span><span style="color: #a626a4;">]</span>,
+    .merge<span style="color: #4078f2;">(</span>permno_gvkey<span style="color: #a626a4;">[</span><span style="color: #50a14f;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'begdate'</span>,<span style="color: #50a14f;">'enddate'</span><span style="color: #50a14f;">]</span><span style="color: #a626a4;">]</span>,
+    how=<span style="color: #50a14f;">'inner'</span>,on=<span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">merged</span> = merged.query<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'begdate&lt;=date&lt;=enddate'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">merged</span> = merged.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">merged</span>= merged.merge<span style="color: #4078f2;">(</span>funda<span style="color: #a626a4;">[</span><span style="color: #50a14f;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'datadate'</span>,<span style="color: #50a14f;">'yyyymm'</span>,<span style="color: #50a14f;">'seq'</span><span style="color: #50a14f;">]</span><span style="color: #a626a4;">]</span>,
     how=<span style="color: #50a14f;">'inner'</span>,on=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
-<span style="color: #6a1868;">merged</span> = merged.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span>,<span style="color: #50a14f;">'me'</span>,<span style="color: #50a14f;">'seq'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">merged</span> = merged.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">merged</span> = merged.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>.reset_index<span style="color: #4078f2;">(</span>drop=<span style="color: #b751b6;">True</span><span style="color: #4078f2;">)</span>
 </pre>
@@ -2248,12 +2332,12 @@ os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)<
 </div>
 </div>
 </div>
-<div id="outline-container-orgbd57bb4" class="outline-3">
-<h3 id="orgbd57bb4"><span class="section-number-3">7.5</span> Code: merge CRSP and Compustat (wrds cloud)</h3>
+<div id="outline-container-org44acb48" class="outline-3">
+<h3 id="org44acb48"><span class="section-number-3">7.5</span> Code: merge CRSP and Compustat (wrds cloud)</h3>
 <div class="outline-text-3" id="text-7-5">
 </div>
-<div id="outline-container-orgc0a6a90" class="outline-4">
-<h4 id="orgc0a6a90"><span class="section-number-4">7.5.1</span> Python</h4>
+<div id="outline-container-org08ea3de" class="outline-4">
+<h4 id="org08ea3de"><span class="section-number-4">7.5.1</span> Python</h4>
 <div class="outline-text-4" id="text-7-5-1">
 <div class="org-src-container">
 <pre class="src src-python"><span style="color: #e45649;">import</span> pandas <span style="color: #e45649;">as</span> pd
@@ -2268,44 +2352,61 @@ warnings.filterwarnings<span style="color: #4078f2;">(</span><span style="color:
 os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)</span>
 
 <span style="color: #6a1868;">conn</span> = wrds.Connection<span style="color: #4078f2;">()</span>
+<span style="color: #6a1868;">permno_gvkey</span> = conn.raw_sql<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"""</span>
+<span style="color: #50a14f;">    select cast(a.permno as int),b.gvkey,a.namedt,a.nameendt</span>
+<span style="color: #50a14f;">    from crsp.msenames a left join</span>
+<span style="color: #50a14f;">        (select gvkey,cusip</span>
+<span style="color: #50a14f;">        from comp.security</span>
+<span style="color: #50a14f;">        where right(iid,1)!='C') b</span>
+<span style="color: #50a14f;">    on a.ncusip=substr(b.cusip,1,8)</span>
+<span style="color: #50a14f;">    where a.ncusip!=''</span>
+<span style="color: #50a14f;">    order by permno,namedt</span>
+<span style="color: #50a14f;">"""</span>,date_cols=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'namedt'</span>,<span style="color: #50a14f;">'nameendt'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 
-<span style="color: #6a1868;">merged1</span> = conn.raw_sql<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"""</span>
-<span style="color: #50a14f;">    select t3.*, t4.datadate, t4.seq, t4.fyear</span>
+<span style="color: #6a1868;">permno_gvkey</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'gvkey'</span><span style="color: #4078f2;">]</span> = permno_gvkey.groupby<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">)</span> \
+    <span style="color: #4078f2;">[</span><span style="color: #50a14f;">'gvkey'</span><span style="color: #4078f2;">]</span>.fillna<span style="color: #4078f2;">(</span>method=<span style="color: #50a14f;">'bfill'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey<span style="color: #4078f2;">[</span>permno_gvkey<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span>.notna<span style="color: #a626a4;">()</span><span style="color: #4078f2;">]</span>
+<span style="color: #6a1868;">permno_gvkey</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'begdate'</span><span style="color: #4078f2;">]</span> = permno_gvkey.groupby<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span> \
+    <span style="color: #4078f2;">[</span><span style="color: #50a14f;">'namedt'</span><span style="color: #4078f2;">]</span>.transform<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'min'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'enddate'</span><span style="color: #4078f2;">]</span> = permno_gvkey.groupby<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span> \
+    <span style="color: #4078f2;">[</span><span style="color: #50a14f;">'nameendt'</span><span style="color: #4078f2;">]</span>.transform<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'max'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey<span style="color: #4078f2;">[</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'begdate'</span>,<span style="color: #50a14f;">'enddate'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">]</span>
+<span style="color: #6a1868;">permno_gvkey</span> = permno_gvkey.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'gvkey'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span> \
+    .reset_index<span style="color: #4078f2;">(</span>drop=<span style="color: #b751b6;">True</span><span style="color: #4078f2;">)</span>
+
+<span style="color: #6a1868;">msf</span> = conn.raw_sql<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"""</span>
+<span style="color: #50a14f;">    select a.*</span>
 <span style="color: #50a14f;">    from</span>
-<span style="color: #50a14f;">    (select t1.*, t2.gvkey</span>
-<span style="color: #50a14f;">    from</span>
-<span style="color: #50a14f;">    (select cast(a.permno as int), a.date,</span>
-<span style="color: #50a14f;">        abs(a.prc)*a.shrout/1000 as me, b.ncusip,</span>
-<span style="color: #50a14f;">        cast(date_part('year',cast(date as date)) as int) as year,</span>
-<span style="color: #50a14f;">        cast(date_part('month',cast(date as date)) as int) as month</span>
-<span style="color: #50a14f;">    from crsp.msf a inner join crsp.msenames b</span>
-<span style="color: #50a14f;">    on a.permno = b.permno and a.date&gt;=b.namedt and a.date&lt;=b.nameendt</span>
-<span style="color: #50a14f;">    where b.exchcd between 1 and 3 and b.shrcd between 10 and 11</span>
-<span style="color: #50a14f;">        and a.date&gt;='01/01/2013' and a.date&lt;='12/31/2017') t1</span>
-<span style="color: #50a14f;">    inner join</span>
-<span style="color: #50a14f;">    (select distinct cast(c.permno as int), d.gvkey</span>
-<span style="color: #50a14f;">    from crsp.msenames c inner join comp.security d</span>
-<span style="color: #50a14f;">    on c.ncusip=substr(d.cusip,1,8)</span>
-<span style="color: #50a14f;">    where c.ncusip!='') t2</span>
-<span style="color: #50a14f;">    on (t1.permno=t2.permno)</span>
-<span style="color: #50a14f;">    ) t3</span>
-<span style="color: #50a14f;">    inner join</span>
-<span style="color: #50a14f;">    (select gvkey, datadate, seq, fyear,</span>
-<span style="color: #50a14f;">        cast(date_part('year',cast(datadate as date)) as int) as year,</span>
-<span style="color: #50a14f;">        cast(date_part('month',cast(datadate as date)) as int) as month</span>
+<span style="color: #50a14f;">    (select cast(a.permno as int),a.date,abs(a.prc)*a.shrout/1000 as me</span>
+<span style="color: #50a14f;">    from crsp.msf a left join msenames b</span>
+<span style="color: #50a14f;">    on a.permno=b.permno and a.date&gt;=b.namedt and a.date&lt;=b.nameendt</span>
+<span style="color: #50a14f;">    where b.shrcd between 10 and 11</span>
+<span style="color: #50a14f;">        and b.exchcd between 1 and 3</span>
+<span style="color: #50a14f;">        and a.date between '01/01/1975' and '12/31/2017'</span>
+<span style="color: #50a14f;">    ) a</span>
+<span style="color: #50a14f;">    where me&gt;0</span>
+<span style="color: #50a14f;">"""</span>,date_cols=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'date'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+
+<span style="color: #6a1868;">msf</span> = msf.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'date'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">msf</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'yyyymm'</span><span style="color: #4078f2;">]</span> = msf<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'date'</span><span style="color: #4078f2;">]</span>.dt.year*<span style="color: #da8548; font-weight: bold;">100</span> + msf<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'date'</span><span style="color: #4078f2;">]</span>.dt.month
+
+<span style="color: #6a1868;">funda</span> = conn.raw_sql<span style="color: #4078f2;">(</span><span style="color: #50a14f;">"""</span>
+<span style="color: #50a14f;">    select gvkey,datadate,fyear,seq</span>
 <span style="color: #50a14f;">    from comp.funda</span>
 <span style="color: #50a14f;">    where indfmt='INDL' and consol='C' and popsrc='D'</span>
-<span style="color: #50a14f;">        and datafmt='STD' and curcd='USD' and seq&gt;0</span>
-<span style="color: #50a14f;">        and datadate&gt;='01/01/1975' and datadate&lt;='12/31/2017') t4</span>
-<span style="color: #50a14f;">    on (t3.gvkey=t4.gvkey and t3.year=t4.year and t3.month=t4.month)</span>
-<span style="color: #50a14f;">    where t3.me&gt;0</span>
-<span style="color: #50a14f;">    """</span><span style="color: #4078f2;">)</span>
+<span style="color: #50a14f;">        and datafmt='STD' and seq&gt;0</span>
+<span style="color: #50a14f;">        and datadate&gt;='01/01/1975' and datadate&lt;='12/31/2017'</span>
+<span style="color: #50a14f;">"""</span>,date_cols=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'datadate'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 
-<span style="color: #6a1868;">merged1</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'yyyymm'</span><span style="color: #4078f2;">]</span> = merged1<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'year'</span><span style="color: #4078f2;">]</span>*<span style="color: #da8548; font-weight: bold;">100</span> + merged1<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'month'</span><span style="color: #4078f2;">]</span>
-<span style="color: #6a1868;">merged1</span> = merged1.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span>,<span style="color: #50a14f;">'me'</span>,<span style="color: #50a14f;">'seq'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">funda</span><span style="color: #4078f2;">[</span><span style="color: #50a14f;">'yyyymm'</span><span style="color: #4078f2;">]</span> = funda<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'datadate'</span><span style="color: #4078f2;">]</span>.dt.year*<span style="color: #da8548; font-weight: bold;">100</span> + funda<span style="color: #4078f2;">[</span><span style="color: #50a14f;">'datadate'</span><span style="color: #4078f2;">]</span>.dt.month
+<span style="color: #6a1868;">funda</span> = funda.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'fyear'</span>,<span style="color: #50a14f;">'datadate'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">funda</span> = funda.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'fyear'</span><span style="color: #a626a4;">]</span>,keep=<span style="color: #50a14f;">'last'</span><span style="color: #4078f2;">)</span>
+
+<span style="color: #6a1868;">merged1</span> = msf.merge<span style="color: #4078f2;">(</span>permno_gvkey,how=<span style="color: #50a14f;">'inner'</span>,on=<span style="color: #50a14f;">'permno'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">merged1</span> = merged1.query<span style="color: #4078f2;">(</span><span style="color: #50a14f;">'begdate&lt;=date&lt;=enddate'</span><span style="color: #4078f2;">)</span>
+<span style="color: #6a1868;">merged1</span> = merged1.merge<span style="color: #4078f2;">(</span>funda,how=<span style="color: #50a14f;">'inner'</span>,on=<span style="color: #a626a4;">[</span><span style="color: #50a14f;">'gvkey'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
 <span style="color: #6a1868;">merged1</span> = merged1.drop_duplicates<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>
-<span style="color: #6a1868;">merged1</span> = merged1.sort_values<span style="color: #4078f2;">(</span><span style="color: #a626a4;">[</span><span style="color: #50a14f;">'permno'</span>,<span style="color: #50a14f;">'yyyymm'</span><span style="color: #a626a4;">]</span><span style="color: #4078f2;">)</span>.reset_index<span style="color: #4078f2;">(</span>drop=<span style="color: #b751b6;">True</span><span style="color: #4078f2;">)</span>
-
 </pre>
 </div>
 </div>
@@ -2313,20 +2414,18 @@ os.chdir<span style="color: #4078f2;">(</span>wd<span style="color: #4078f2;">)<
 </div>
 </div>
 
-<div id="outline-container-org64b82a7" class="outline-2">
-<h2 id="org64b82a7"><span class="section-number-2">8</span> Asset Pricing</h2>
+<div id="outline-container-org33d9e90" class="outline-2">
+<h2 id="org33d9e90"><span class="section-number-2">8</span> Asset Pricing</h2>
 </div>
-<div id="outline-container-org976a6b8" class="outline-2">
-<h2 id="org976a6b8"><span class="section-number-2">9</span> Corporate Governance</h2>
+<div id="outline-container-org1b1869d" class="outline-2">
+<h2 id="org1b1869d"><span class="section-number-2">9</span> Corporate Governance</h2>
 </div>
-<div id="outline-container-orga79a41e" class="outline-2">
-<h2 id="orga79a41e"><span class="section-number-2">10</span> Event Study</h2>
+<div id="outline-container-orga2fb18f" class="outline-2">
+<h2 id="orga2fb18f"><span class="section-number-2">10</span> Event Study</h2>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="author">Author: Peng Li</p>
-<p class="email">Email: <a href="mailto:p.li@leeds.ac.uk">p.li@leeds.ac.uk</a></p>
-<p class="date">Created: 2019-09-30 Mon 11:40</p>
+<p class="date">Created: 2019-11-10 Sun 21:18</p>
 </div>
 </body>
 </html>
