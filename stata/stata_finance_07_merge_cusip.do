@@ -1,7 +1,7 @@
 clear
 set more off
 
-cd "/users/ml/dropbox/teaching/data/"
+cd ""
 
 /*Compustat data*/
 import delimited merge_compustat.txt, clear
