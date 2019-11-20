@@ -1,7 +1,7 @@
 clear
 set more off
 
-cd "/users/ml/dropbox/teaching/data/"
+cd ""
 
 /*Generate PERMNO-GVKEY link table*/
 import delimited security.txt, clear
