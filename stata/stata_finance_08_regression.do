@@ -1,7 +1,7 @@
 clear
 set more off
 
-cd "/users/ml/dropbox/teaching/data/"
+cd ""
 
 use merged, clear
 
